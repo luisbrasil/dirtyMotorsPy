@@ -1,6 +1,8 @@
+import math
 from Models.object import Object
 from Models.point import Point
 from Models.vector import Vector
+from utils import blit_rotate_center
 
 
 class Car(Object):
@@ -19,3 +21,26 @@ class Car(Object):
             self.angle += self.rotation_vel
         elif right:
             self.angle -= self.rotation_vel
+            
+    def move_forward(self):
+        self.vel = min(self.vel + self.acceleration, self.max_vel)
+        self.move()
+        
+    def move_backward(self):
+        self.vel = max(self.vel - self.acceleration, -self.max_vel/2)
+        self.move()
+        
+    def move(self):
+        radians = math.radians(self.angle)
+        vertical = math.cos(radians) * self.vel
+        horizontal = math.sin(radians) * self.vel
+
+        self.point.y -= vertical
+        self.point.x -= horizontal
+        
+    def reduce_speed(self):
+        self.vel = max(self.vel - self.acceleration / 2, 0)
+        self.move()
+
+    def draw(self, win):
+        blit_rotate_center(win, self.img, (self.x, self.y), self.angle)

@@ -1,7 +1,7 @@
 import pygame
 import sys
-
 from Models.car import Car
+from utils import scale_image
 
 # Initialize Pygame
 pygame.init()
@@ -11,7 +11,8 @@ WIDTH, HEIGHT = 800, 600
 SQUARE_SIZE = 50
 FPS = 60
 
-# Colors
+# Colors 
+BLACK_CAR = scale_image(pygame.image.load("sprites/BlackOut.png"), 0.55)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
@@ -37,20 +38,30 @@ while True:
     # Handle key events for moving the square
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        square_x -= 5
+        playerCar.rotate(left=True)
     if keys[pygame.K_RIGHT]:
-        square_x += 5
+        playerCar.rotate(right=True)
     if keys[pygame.K_UP]:
-        square_y -= 5
+        playerCar.point.x -= 5
+        pass
     if keys[pygame.K_DOWN]:
-        square_y += 5
+        playerCar.point.x += 5
+        pass
 
-    # Fill the screen with the background color
-    screen.fill(WHITE)
+     # Load the background image
+    background_image = pygame.image.load("sprites/RacingTrack.png")
+
+    # Scale the background image to fit the screen size
+    background_image = pygame.transform.scale(
+        background_image, (WIDTH, HEIGHT))
+
+    # Renderize the background image
+    screen.blit(background_image, (0, 0))
 
     # Draw the square
-    pygame.draw.rect(
-        screen, RED, (square_x, square_y, SQUARE_SIZE, SQUARE_SIZE))
+    car_image = BLACK_CAR
+    rotated_car = pygame.transform.rotate(car_image, playerCar.angle)
+    screen.blit(rotated_car, (playerCar.point.x, playerCar.point.y))
 
     # Update the display
     pygame.display.flip()

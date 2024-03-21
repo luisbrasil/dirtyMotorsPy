@@ -62,12 +62,16 @@ while True:
 
     # Renderize the background image
     screen.blit(background_image, (0, 0))
-
+ 
     # Draw the square
     car_image = BLACK_CAR
     rotated_car = pygame.transform.rotate(car_image, playerCar.angle)
-    screen.blit(rotated_car, (playerCar.point.x, playerCar.point.y))
+    screen.blit(rotated_car, (playerCar.position.x, playerCar.position.y))
 
+    #Tratar o eixo de rotação sendo o eixo central
+    #Pegar height e width do carro 
+    #Alguma maneira de reutilizar o sprite antigo sem ter que gerar um novo sprit o tempo todo
+    
     # Update the display
     pygame.display.flip()
 

@@ -2,6 +2,6 @@ from Models.vector import Vector
 
 
 class Object:
-    def __init__(self, point, vector):
-        self.point: Vector = point
-        self.vector: Vector = vector
+    def __init__(self, position, speed):
+        self.position: Vector = position
+        self.speed: Vector = speed

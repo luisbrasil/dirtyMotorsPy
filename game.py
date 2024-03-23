@@ -21,7 +21,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Moving Square")
 
 # Initial square position
-playerCar = Car(100,5)
+playerCar = Car(100,1)
 square_x = WIDTH // 2 - SQUARE_SIZE // 2
 square_y = HEIGHT // 2 - SQUARE_SIZE // 2
 

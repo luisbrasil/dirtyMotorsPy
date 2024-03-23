@@ -17,23 +17,26 @@ class Car(Object):
 
     # Pegar o tempo de cada frame para multiplicar a velocidade angular
     def rotate(self, left=False, right=False):
-        deltaAngle = self.rotation_vel
         if left:
             self.angle += self.rotation_vel
         elif right:
             self.angle -= self.rotation_vel
         
-        xSpeed = math.cos(deltaAngle) * self.speed.x + math.sin(deltaAngle) * self.speed.y
-        ySpeed = - math.sin(deltaAngle) * self.speed.x + math.cos(deltaAngle) * self.speed.y
+        xSpeed = math.cos(self.angle) * self.speed.x + \
+            math.sin(self.angle) * self.speed.y
+        ySpeed = - math.sin(self.angle) * self.speed.x + \
+            math.cos(self.angle) * self.speed.y
         self.speed.x = xSpeed
         self.speed.y = ySpeed
             
     def move_forward(self):
-        self.vel = min(self.vel + self.acceleration, self.max_vel)
+        self.speed.x = min(self.speed.x + self.acceleration, self.max_vel)
+        self.speed.y = min(self.speed.y + self.acceleration, self.max_vel)
         self.move()
         
     def move_backward(self):
-        self.vel = max(self.vel - self.acceleration, -self.max_vel/2)
+        self.speed.x = max(self.speed.x - self.acceleration, -self.max_vel/2)
+        self.speed.y = max(self.speed.y - self.acceleration, -self.max_vel/2)
         self.move()
         
     # A propriedade self.angle em si já deve ser um radiano, não converte-lo
@@ -43,8 +46,10 @@ class Car(Object):
         self.position.x += self.speed.x
         
     def reduce_speed(self):
-        self.vel = max(self.vel - self.acceleration / 2, 0)
+        self.speed.x = max(self.speed.x - self.acceleration / 2, 0)
+        self.speed.y = max(self.speed.y - self.acceleration / 2, 0)
         self.move()
 
     def draw(self, win):
-        blit_rotate_center(win, self.img, (self.x, self.y), self.angle)
+        blit_rotate_center(
+            win, self.img, (self.position.x, self.position.y), self.angle)

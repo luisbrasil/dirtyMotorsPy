@@ -2,6 +2,7 @@ import pygame
 import sys
 from Models.car import Car
 from utils import scale_image
+from utils import blit_rotate_center;
 
 # Initialize Pygame
 pygame.init()
@@ -21,7 +22,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Moving Square")
 
 # Initial square position
-playerCar = Car(100,1)
+playerCar = Car(100,10)
 square_x = WIDTH // 2 - SQUARE_SIZE // 2
 square_y = HEIGHT // 2 - SQUARE_SIZE // 2
 
@@ -65,8 +66,7 @@ while True:
  
     # Draw the square
     car_image = BLACK_CAR
-    rotated_car = pygame.transform.rotate(car_image, playerCar.angle)
-    screen.blit(rotated_car, (playerCar.position.x, playerCar.position.y))
+    playerCar.draw(screen)
 
     #Tratar o eixo de rotação sendo o eixo central
     #Pegar height e width do carro 

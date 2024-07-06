@@ -1,5 +1,5 @@
-import pygame
 import sys
+import pygame
 from Models.car import Car
 from utils import scale_image
 from utils import blit_rotate_center;
@@ -39,6 +39,7 @@ while True:
     # Handle key events for moving the square
     keys = pygame.key.get_pressed()
     moved = False
+    time = clock.tick(60) / 1000
     
     if keys[pygame.K_LEFT]:
         playerCar.rotate(left=True)
@@ -46,13 +47,13 @@ while True:
         playerCar.rotate(right=True)
     if keys[pygame.K_UP]:
         moved = True
-        playerCar.move_forward()
+        playerCar.move_forward(time)
     if keys[pygame.K_DOWN]:
         moved = True
-        playerCar.move_backward()
+        playerCar.move_backward(time)
     
     if not moved:
-        playerCar.reduce_speed()
+        playerCar.reduce_speed(time)
 
      # Load the background image
     background_image = pygame.image.load("sprites/RacingTrack.png")

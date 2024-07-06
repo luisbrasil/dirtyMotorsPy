@@ -1,9 +1,9 @@
 import math
+import pygame
 from Models.object import Object
 from Models.vector import Vector
 from utils import blit_rotate_center
 from utils import scale_image
-import pygame
 
 class Car(Object):
     START_POS = (0, 0)
@@ -14,7 +14,7 @@ class Car(Object):
         self.max_vel = max_vel
         self.vel = 0
         self.direction= self.DIRECTION_RIGHT
-        self.rotation_vel = math.radians(rotation_vel)
+        self.rotation_vel = 0.1
         self.angle = 0
         self.acceleration = 0.1
         self.img = scale_image(pygame.image.load("./sprites/BlackOut.png"), 0.55)
@@ -39,22 +39,18 @@ class Car(Object):
         self.speed.set_module(self.vel)
         super().physics(time)
 
-    def move_forward(self):
+    def move_forward(self, time):
         self.vel = min(self.vel + self.acceleration, self.max_vel)
-        self.move()
+        self.physics(time)
 
-    def move_backward(self):
+    def move_backward(self, time):
         self.vel = max(self.vel - self.acceleration, -self.max_vel / 2)
-        self.move()
+        self.physics(time)
 
-    def move(self):
-        self.position.x += self.vel * math.cos(self.angle)
-        self.position.y += self.vel * math.sin(self.angle)
-
-    def reduce_speed(self):
+    def reduce_speed(self, time):
         self.vel = max(self.vel - self.acceleration / 2,
                        0) if self.vel > 0 else min(self.vel + self.acceleration / 2, 0)
-        self.move()
+        self.physics(time)
 
     def draw(self, win):
         blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(

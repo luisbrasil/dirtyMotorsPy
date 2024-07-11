@@ -22,7 +22,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Moving Square")
 
 # Initial square position
-playerCar = Car(100,10)
+playerCar = Car(1000,10)
 square_x = WIDTH // 2 - SQUARE_SIZE // 2
 square_y = HEIGHT // 2 - SQUARE_SIZE // 2
 
@@ -42,18 +42,20 @@ while True:
     time = clock.tick(60) / 1000
     
     if keys[pygame.K_LEFT]:
-        playerCar.rotate(left=True)
+        playerCar.rotate(time=time,left=True)
     if keys[pygame.K_RIGHT]:
-        playerCar.rotate(right=True)
+        playerCar.rotate(time=time,right=True)
     if keys[pygame.K_UP]:
         moved = True
         playerCar.move_forward(time)
     if keys[pygame.K_DOWN]:
         moved = True
-        playerCar.move_backward(time)
+        #playerCar.move_backward(time)
     
-    if not moved:
-        playerCar.reduce_speed(time)
+    #if not moved:
+        #playerCar.reduce_speed(time)
+
+    playerCar.physics(time)
 
      # Load the background image
     background_image = pygame.image.load("sprites/RacingTrack.png")

@@ -9,5 +9,5 @@ class Object:
     def physics(self, time:float):
         self.position.x += self.speed.x * time
         self.position.y += self.speed.y * time
-
-    
+        #print("Velocidade x =" + str(self.speed.x))
+        #print("Velocidade y =" + str(self.speed.y))

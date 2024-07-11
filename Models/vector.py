@@ -1,7 +1,7 @@
 import math
 
 class Vector:
-    def __init__(self, x, y):
+    def __init__(self, x:float, y:float):
         self.x = x
         self.y = y
 
@@ -16,11 +16,12 @@ class Vector:
     
     
     def set_module(self, mod: float):
-        self.__div__(self.module)
+        self.__div__(self.module())
         self.__mul__(mod)        
     
     def module(self):
-        return math.sqrt(self.prod_int(self, self))
+        return math.sqrt(Vector.prod_int(self, self))
     
+    @staticmethod
     def prod_int(v1, v2):
         return v1.x * v2.x + v1.y * v2.y

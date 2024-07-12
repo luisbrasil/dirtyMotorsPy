@@ -1,5 +1,4 @@
 import math
-import pygame
 from models.object import Object
 from models.vector import Vector
 from utils.image_rendering import blit_rotate_center
@@ -13,7 +12,7 @@ class Car(Object):
         self.max_vel = max_vel
         self.vel = 0
         self.direction = Vector(1,0)
-        self.rotation_vel = 3.14/4
+        self.rotation_vel = 3.14/2
         self.angle = 0
         self.acceleration = 5
         self.img = image
@@ -27,23 +26,26 @@ class Car(Object):
         cosAngle = math.cos(self.angle)
         sinAngle = math.sin(self.angle)
 
-        xDir = cosAngle * self.DIRECTION_RIGHT.x - sinAngle * self.DIRECTION_RIGHT.y
-        yDir = sinAngle * self.DIRECTION_RIGHT.x + cosAngle * self.DIRECTION_RIGHT.y
-
-        self.direction.x = xDir
-        self.direction.y = yDir
-
+        self.direction.x = cosAngle * self.DIRECTION_RIGHT.x - sinAngle * self.DIRECTION_RIGHT.y
+        self.direction.y = sinAngle * self.DIRECTION_RIGHT.x + cosAngle * self.DIRECTION_RIGHT.y
+        
     def physics(self, time:float):
         if(self.vel == 0):
             self.speed = Vector(0,0)
+        elif(self.vel < 0):
+            self.speed.x = -(self.direction.x)
+            self.speed.y = -(self.direction.y)
+            self.speed.set_module(abs(self.vel))
         else:
-            self.speed = self.direction 
-            self.speed.set_module(self.vel)
+            self.speed.x = self.direction.x
+            self.speed.y = self.direction.y
+            self.speed.set_module(abs(self.vel))
             
         super().physics(time)
 
     def move_forward(self, time):
-        self.vel = min(self.vel + self.acceleration, self.max_vel)
+        acceleration = (5 if self.vel < 0 else 1) * self.acceleration
+        self.vel = min(self.vel + acceleration, self.max_vel)
 
     def move_backward(self, time):
         acceleration = (5 if self.vel > 0 else 1) * self.acceleration

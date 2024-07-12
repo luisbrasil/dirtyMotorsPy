@@ -8,4 +8,4 @@ class Object:
         
     def physics(self, time:float):
         self.position.x += self.speed.x * time
-        self.position.y += self.speed.y * time
+        self.position.y -= self.speed.y * time

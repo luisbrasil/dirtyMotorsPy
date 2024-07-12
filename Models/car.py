@@ -1,15 +1,14 @@
 import math
 import pygame
-from Models.object import Object
-from Models.vector import Vector
-from utils import blit_rotate_center
-from utils import scale_image
+from models.object import Object
+from models.vector import Vector
+from utils.image_rendering import blit_rotate_center
 
 class Car(Object):
     START_POS = (0, 0)
     DIRECTION_RIGHT = Vector(1,0)
 
-    def __init__(self, max_vel, rotation_vel):
+    def __init__(self, max_vel, rotation_vel, image):
         super().__init__(Vector(*self.START_POS), Vector(0, 0))
         self.max_vel = max_vel
         self.vel = 0
@@ -17,7 +16,7 @@ class Car(Object):
         self.rotation_vel = 3.14/4
         self.angle = 0
         self.acceleration = 5
-        self.img = scale_image(pygame.image.load("./sprites/BlackOut.png"), 0.55)
+        self.img = image
 
     def rotate(self, time:float, left=False, right=False):
         if left:
@@ -27,7 +26,7 @@ class Car(Object):
 
         cosAngle = math.cos(self.angle)
         sinAngle = math.sin(self.angle)
-        # self.angle já está em radianos
+
         xDir = cosAngle * self.DIRECTION_RIGHT.x - sinAngle * self.DIRECTION_RIGHT.y
         yDir = sinAngle * self.DIRECTION_RIGHT.x + cosAngle * self.DIRECTION_RIGHT.y
 
@@ -45,7 +44,6 @@ class Car(Object):
 
     def move_forward(self, time):
         self.vel = min(self.vel + self.acceleration, self.max_vel)
-        #print('Velocidade modular: ' + str(self.vel))
 
     def move_backward(self, time):
         acceleration = (5 if self.vel > 0 else 1) * self.acceleration

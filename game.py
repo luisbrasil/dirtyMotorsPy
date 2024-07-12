@@ -1,8 +1,7 @@
 import sys
 import pygame
-from Models.car import Car
-from utils import scale_image
-from utils import blit_rotate_center;
+from models.car import Car
+from utils.image_rendering import scale_image
 
 # Initialize Pygame
 pygame.init()
@@ -13,7 +12,7 @@ SQUARE_SIZE = 50
 FPS = 60
 
 # Colors 
-BLACK_CAR = scale_image(pygame.image.load("sprites/BlackOut.png"), 0.55)
+BLACK_CAR = scale_image(pygame.image.load("assets/sprites/BlackOut.png"), 0.55)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
@@ -22,7 +21,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Moving Square")
 
 # Initial square position
-playerCar = Car(1000,10)
+playerCar = Car(1000, 10, BLACK_CAR)
 square_x = WIDTH // 2 - SQUARE_SIZE // 2
 square_y = HEIGHT // 2 - SQUARE_SIZE // 2
 
@@ -50,15 +49,15 @@ while True:
         playerCar.move_forward(time)
     if keys[pygame.K_DOWN]:
         moved = True
-        #playerCar.move_backward(time)
+        playerCar.move_backward(time)
     
-    #if not moved:
-        #playerCar.reduce_speed(time)
+    if not moved:
+        playerCar.reduce_speed(time)
 
     playerCar.physics(time)
 
      # Load the background image
-    background_image = pygame.image.load("sprites/RacingTrack.png")
+    background_image = pygame.image.load("assets/sprites/RacingTrack.png")
 
     # Scale the background image to fit the screen size
     background_image = pygame.transform.scale(
@@ -66,9 +65,7 @@ while True:
 
     # Renderize the background image
     screen.blit(background_image, (0, 0))
- 
-    # Draw the square
-    car_image = BLACK_CAR
+
     playerCar.draw(screen)
 
     #Tratar o eixo de rotação sendo o eixo central

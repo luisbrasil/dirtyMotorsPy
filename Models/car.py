@@ -1,4 +1,5 @@
 import math
+import pygame
 from models.object import Object
 from models.vector import Vector
 from utils.image_rendering import blit_rotate_center
@@ -37,8 +38,7 @@ class Car(Object):
             self.speed.y = -(self.direction.y)
             self.speed.set_module(abs(self.vel))
         else:
-            self.speed.x = self.direction.x
-            self.speed.y = self.direction.y
+            self.speed = self.direction
             self.speed.set_module(abs(self.vel))
             
         super().physics(time)
@@ -58,3 +58,22 @@ class Car(Object):
     def draw(self, win):
         blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(
             self.angle))  # Converte o ângulo para graus ao desenhar
+
+    def handle_input(self, time, keys):
+        moved = False
+        
+        if keys[pygame.K_LEFT]:
+            self.rotate(time=time,left=True)
+        if keys[pygame.K_RIGHT]:
+            self.rotate(time=time,right=True)
+        if keys[pygame.K_UP]:
+            moved = True
+            self.move_forward(time)
+        if keys[pygame.K_DOWN]:
+            moved = True
+            self.move_backward(time)
+            
+        if not moved:
+            self.reduce_speed(time)
+
+        self.physics(time)        

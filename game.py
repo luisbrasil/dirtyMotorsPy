@@ -1,5 +1,6 @@
 import sys
 import pygame
+from models.obstacle import Obstacle
 from models.car import Car
 from utils.image_rendering import scale_image
 
@@ -16,8 +17,9 @@ class Game:
         WIDTH, HEIGHT = 800, 600
         FPS = 60
 
-        # Colors 
+        # Sprites 
         BLACK_CAR = scale_image(pygame.image.load("assets/sprites/BlackOut.png"), 0.55)
+        PREDA = scale_image(pygame.image.load("assets/sprites/preda.png"), 0.20)
 
         # Create the Pygame window
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -25,6 +27,9 @@ class Game:
 
         # Initial square position
         playerCar = Car(1000, 10, BLACK_CAR)
+        rockObstacle = Obstacle(PREDA)
+        
+        object_list = [playerCar, rockObstacle]
 
         # Set up clock to control the frame rate
         clock = pygame.time.Clock()
@@ -41,6 +46,8 @@ class Game:
             time = clock.tick(60) / 1000
             
             playerCar.handle_input(time,keys)
+            for object in object_list:
+                object.physics(time)
 
             # Load the background image
             background_image = pygame.image.load("assets/sprites/RacingTrack.png")
@@ -53,6 +60,7 @@ class Game:
             screen.blit(background_image, (0, 0))
 
             playerCar.draw(screen)
+            rockObstacle.draw(screen)
             
             # Update the display
             pygame.display.flip()

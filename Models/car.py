@@ -13,7 +13,7 @@ class Car(Object):
         self.max_vel = max_vel
         self.vel = 0
         self.direction = Vector(1,0)
-        self.rotation_vel = 3.14/2
+        self.rotation_vel = 3.14
         self.angle = 0
         self.acceleration = 5
         self.img = image
@@ -38,7 +38,8 @@ class Car(Object):
             self.speed.y = -(self.direction.y)
             self.speed.set_module(abs(self.vel))
         else:
-            self.speed = self.direction
+            self.speed.x = self.direction.x
+            self.speed.y = self.direction.y
             self.speed.set_module(abs(self.vel))
             
         super().physics(time)
@@ -75,5 +76,3 @@ class Car(Object):
             
         if not moved:
             self.reduce_speed(time)
-
-        self.physics(time)        

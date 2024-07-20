@@ -1,5 +1,6 @@
 import sys
 import pygame
+from game.assets_port import AssetsPort
 from models.obstacle import Obstacle
 from models.car import Car
 from utils.image_rendering import scale_image
@@ -12,22 +13,17 @@ class Game:
     
     def run(self):
         # Initialize Pygame
-
         # Constants
         WIDTH, HEIGHT = 800, 600
         FPS = 60
-
-        # Sprites 
-        BLACK_CAR = scale_image(pygame.image.load("assets/sprites/BlackOut.png"), 0.55)
-        PREDA = scale_image(pygame.image.load("assets/sprites/preda.png"), 0.20)
 
         # Create the Pygame window
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Dirty Motors")
 
         # Initial square position
-        playerCar = Car(1000, 10, BLACK_CAR)
-        rockObstacle = Obstacle(PREDA)
+        playerCar = Car(1000, 10, AssetsPort.BLACK_CAR)
+        rockObstacle = Obstacle(AssetsPort.PREDA)
         
         object_list = [playerCar, rockObstacle]
 

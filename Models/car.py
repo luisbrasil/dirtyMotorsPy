@@ -1,5 +1,5 @@
 import math
-import pygame
+from game.inputs_port import InputsPort
 from models.object import Object
 from models.vector import Vector
 from utils.image_rendering import blit_rotate_center
@@ -63,14 +63,14 @@ class Car(Object):
     def handle_input(self, time, keys):
         moved = False
         
-        if keys[pygame.K_LEFT]:
+        if keys[InputsPort.KEY_LEFT]:
             self.rotate(time=time,left=True)
-        if keys[pygame.K_RIGHT]:
+        if keys[InputsPort.KEY_RIGHT]:
             self.rotate(time=time,right=True)
-        if keys[pygame.K_UP]:
+        if keys[InputsPort.KEY_UP]:
             moved = True
             self.move_forward(time)
-        if keys[pygame.K_DOWN]:
+        if keys[InputsPort.KEY_DOWN]:
             moved = True
             self.move_backward(time)
             

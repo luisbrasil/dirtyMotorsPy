@@ -1,6 +1,6 @@
 import math
-from modelss.vector import Vector
-from modelss.object import Object
+from models.vector import Vector
+from models.object import Object
 from utils.image_rendering import blit_rotate_center
 
 

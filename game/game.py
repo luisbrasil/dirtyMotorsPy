@@ -1,8 +1,8 @@
 import sys
 import pygame
 from game.assets_port import AssetsPort
-from models.obstacle import Obstacle
-from models.car import Car
+from modelss.obstacle import Obstacle
+from modelss.car import Car
 from utils.image_rendering import scale_image
 
 class Game:

@@ -1,7 +1,7 @@
 import math
 from game.inputs_port import InputsPort
-from models.object import Object
-from models.vector import Vector
+from modelss.object import Object
+from modelss.vector import Vector
 from utils.image_rendering import blit_rotate_center
 
 class Car(Object):

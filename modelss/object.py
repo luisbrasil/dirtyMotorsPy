@@ -1,4 +1,4 @@
-from models.vector import Vector
+from modelss.vector import Vector
 
 
 class Object:

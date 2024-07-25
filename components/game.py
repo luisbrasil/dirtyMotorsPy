@@ -1,9 +1,9 @@
 import sys
 import pygame
-from game.assets_port import AssetsPort
-from models.obstacle import Obstacle
-from models.car import Car
-from utils.image_rendering import scale_image
+from components.assets_port import AssetsPort
+from entities.obstacle import Obstacle
+from entities.car import Car
+from systems.image_rendering import scale_image
 
 class Game:
     

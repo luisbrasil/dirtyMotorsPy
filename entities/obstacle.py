@@ -1,7 +1,7 @@
 import math
-from models.vector import Vector
-from models.object import Object
-from utils.image_rendering import blit_rotate_center
+from entities.vector import Vector
+from entities.object import Object
+from systems.image_rendering import blit_rotate_center
 
 
 class Obstacle(Object):

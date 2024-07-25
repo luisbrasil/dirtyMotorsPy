@@ -1,5 +1,5 @@
 import pygame
-from utils.image_rendering import scale_image
+from systems.image_rendering import scale_image
 
 
 class AssetsPort:

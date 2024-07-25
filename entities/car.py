@@ -1,8 +1,8 @@
 import math
-from game.inputs_port import InputsPort
-from models.object import Object
-from models.vector import Vector
-from utils.image_rendering import blit_rotate_center
+from components.inputs_port import InputsPort
+from entities.object import Object
+from entities.vector import Vector
+from systems.image_rendering import blit_rotate_center
 
 class Car(Object):
     START_POS = (0, 0)
@@ -13,7 +13,7 @@ class Car(Object):
         self.max_vel = max_vel
         self.vel = 0
         self.direction = Vector(1,0)
-        self.rotation_vel = 3.14
+        self.rotation_vel = 3.14 * 2
         self.angle = 0
         self.acceleration = 5
         self.img = image

@@ -76,3 +76,8 @@ class Car(Object):
             
         if not moved:
             self.reduce_speed(time)
+
+class ControlType(Enum):
+    PLAYER1 = 1
+    PLAYER2 = 2
+    BOT = 3

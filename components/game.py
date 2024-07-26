@@ -3,6 +3,7 @@ import pygame
 from components.assets_port import AssetsPort
 from entities.obstacle import Obstacle
 from entities.car import Car
+from entities.car import ControlType
 from systems.image_rendering import scale_image
 
 class Game:
@@ -22,10 +23,12 @@ class Game:
         pygame.display.set_caption("Dirty Motors")
 
         # Initial square position
-        playerCar = Car(1000, 10, AssetsPort.BLACK_CAR)
+        playerCar = Car(1000, 100, AssetsPort.BLACK_CAR, ControlType.PLAYER1)
+        playerCar2 = Car(1000, 100, AssetsPort.GREEN_CAR, ControlType.PLAYER2)
+        bot = Car(1000, 100, AssetsPort.GREEN_CAR, ControlType.PLAYER2)
         rockObstacle = Obstacle(AssetsPort.PREDA)
         
-        object_list = [playerCar, rockObstacle]
+        object_list = [playerCar, playerCar2, bot, rockObstacle]
 
         # Set up clock to control the frame rate
         clock = pygame.time.Clock()
@@ -45,6 +48,14 @@ class Game:
             for object in object_list:
                 object.physics(time)
 
+            playerCar2.handle_input(time, keys)
+            for object in object_list:
+                object.physics(time)
+            
+            bot.handle_input(time, keys)
+            for object in object_list:
+                object.physics(time)
+            
             # Load the background image
             background_image = pygame.image.load("assets/sprites/RacingTrack.png")
 
@@ -56,6 +67,8 @@ class Game:
             screen.blit(background_image, (0, 0))
 
             playerCar.draw(screen)
+            playerCar2.draw(screen)
+            bot.draw(screen)
             rockObstacle.draw(screen)
             
             # Update the display

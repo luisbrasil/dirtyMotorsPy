@@ -3,12 +3,18 @@ from components.inputs_port import InputsPort
 from entities.object import Object
 from entities.vector import Vector
 from systems.image_rendering import blit_rotate_center
+from enum import Enum
+
+class ControlType(Enum):
+    PLAYER1 = 1
+    PLAYER2 = 2
+    BOT = 3
 
 class Car(Object):
     START_POS = (0, 0)
     DIRECTION_RIGHT = Vector(1,0)
 
-    def __init__(self, max_vel, rotation_vel, image):
+    def __init__(self, max_vel, rotation_vel, image, controlType):
         super().__init__(Vector(*self.START_POS), Vector(0, 0))
         self.max_vel = max_vel
         self.vel = 0
@@ -17,6 +23,7 @@ class Car(Object):
         self.angle = 0
         self.acceleration = 5
         self.img = image
+        self.controlType = controlType
 
     def rotate(self, time:float, left=False, right=False):
         if left:
@@ -59,25 +66,35 @@ class Car(Object):
     def draw(self, win):
         blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(
             self.angle))  # Converte o ângulo para graus ao desenhar
+         
 
     def handle_input(self, time, keys):
         moved = False
         
-        if keys[InputsPort.KEY_LEFT]:
-            self.rotate(time=time,left=True)
-        if keys[InputsPort.KEY_RIGHT]:
-            self.rotate(time=time,right=True)
-        if keys[InputsPort.KEY_UP]:
-            moved = True
-            self.move_forward(time)
-        if keys[InputsPort.KEY_DOWN]:
-            moved = True
-            self.move_backward(time)
-            
-        if not moved:
-            self.reduce_speed(time)
+        if(self.controlType == ControlType.PLAYER1):
+            if keys[InputsPort.KEY_LEFT]:
+                self.rotate(time=time,left=True)
+            if keys[InputsPort.KEY_RIGHT]:
+                self.rotate(time=time,right=True)
+            if keys[InputsPort.KEY_UP]:
+                moved = True
+                self.move_forward(time)
+            if keys[InputsPort.KEY_DOWN]:
+                moved = True
+                self.move_backward(time)                
+            if not moved:
+                self.reduce_speed(time)
+        elif(self.controlType == ControlType.PLAYER2):
+            if keys[InputsPort.KEY_A]:
+                self.rotate(time=time,left=True)
+            if keys[InputsPort.KEY_D]:
+                self.rotate(time=time,right=True)
+            if keys[InputsPort.KEY_W]:
+                moved = True
+                self.move_forward(time)
+            if keys[InputsPort.KEY_S]:
+                moved = True
+                self.move_backward(time)                
+            if not moved:
+                self.reduce_speed(time)
 
-class ControlType(Enum):
-    PLAYER1 = 1
-    PLAYER2 = 2
-    BOT = 3

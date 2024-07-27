@@ -18,7 +18,8 @@ class Car(Object):
     START_POS = (0, 0)
     DIRECTION_RIGHT = Vector(1, 0)
 
-    def __init__(self, max_vel, rotation_vel, image, controlType):
+    #implementar o teletransporte do carro do lado oposto da tela
+    def __init__(self, max_vel, rotation_vel, image, controlType): #passar os botoes de controle a serem utilizados ao invés do control.type
         super().__init__(Vector(*self.START_POS), Vector(0, 0))
         self.max_vel = max_vel
         self.vel = 0
@@ -91,7 +92,7 @@ class Car(Object):
                 self.move_backward(time)
             if not moved:
                 self.reduce_speed(time)
-        elif (self.controlType == ControlType.PLAYER2):
+        elif (self.controlType == ControlType.PLAYER2): #guardar em variaveis as teclas de controle
             if keys[InputsPort.KEY_A]:
                 self.rotate(time=time, left=True)
             if keys[InputsPort.KEY_D]:
@@ -104,7 +105,7 @@ class Car(Object):
                 self.move_backward(time)
             if not moved:
                 self.reduce_speed(time)
-        elif (self.controlType == ControlType.BOT):
+        elif (self.controlType == ControlType.BOT): #criar outra classe pro bot usando herança. Carro / JOGADOR que extende carro e BOT q tbm extende carro
             current_time = py_time.time()
             if current_time - self.last_bot_action_time >= self.bot_action_interval:
                 action = random.choice(

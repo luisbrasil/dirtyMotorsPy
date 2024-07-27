@@ -25,7 +25,7 @@ class Game:
         # Initial square position
         playerCar = Car(1000, 100, AssetsPort.BLACK_CAR, ControlType.PLAYER1)
         playerCar2 = Car(1000, 100, AssetsPort.GREEN_CAR, ControlType.PLAYER2)
-        bot = Car(1000, 100, AssetsPort.GREEN_CAR, ControlType.PLAYER2)
+        bot = Car(10000, 100, AssetsPort.GREEN_CAR, ControlType.BOT)
         rockObstacle = Obstacle(AssetsPort.PREDA)
         
         object_list = [playerCar, playerCar2, bot, rockObstacle]

@@ -11,6 +11,8 @@ class Game:
     
     def __init__(self):
         pygame.init()
+        pygame.mixer.music.load('assets\Thunderstruck.mp3')
+        pygame.mixer.music.play()
     
     
     def run(self):

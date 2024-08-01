@@ -23,8 +23,8 @@ class Game:
         pygame.display.set_caption("Dirty Motors")
 
         # Initial square position
-        playerCar = Car(1000, 100, AssetsPort.BLACK_CAR, ControlType.PLAYER1, WIDTH, HEIGHT)
-        playerCar2 = Car(1000, 100, AssetsPort.GREEN_CAR, ControlType.PLAYER2, WIDTH, HEIGHT)
+        playerCar = Car(100, 100, AssetsPort.BLACK_CAR, ControlType.PLAYER1, WIDTH, HEIGHT)
+        playerCar2 = Car(100, 100, AssetsPort.GREEN_CAR, ControlType.PLAYER2, WIDTH, HEIGHT)
         bot = Car(100, 100, AssetsPort.PINK_CAR, ControlType.BOT, WIDTH, HEIGHT)
         bot2 = Car(100, 100, AssetsPort.BLUE_CAR, ControlType.BOT, WIDTH, HEIGHT)
         rockObstacle = Obstacle(AssetsPort.PREDA)
@@ -72,6 +72,7 @@ class Game:
             screen.blit(background_image, (0, 0))
 
             playerCar.draw(screen)
+            playerCar.hitbox.draw(screen)
             playerCar2.draw(screen)
             bot.draw(screen)
             bot2.draw(screen)

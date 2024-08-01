@@ -1,5 +1,6 @@
 import math
 from components.inputs_port import InputsPort
+from entities.hitbox import Hitbox
 from entities.object import Object
 from entities.vector import Vector
 from systems.image_rendering import blit_rotate_center
@@ -22,7 +23,7 @@ class Car(Object):
         self.img = image
         self.screen_width = screen_width
         self.screen_height = screen_height
-       
+        self.hitbox = Hitbox(self.position.x + 19, self.position.y + 20, 20)
 
     def rotate(self, time: float, left=False, right=False):
         if left:
@@ -51,6 +52,9 @@ class Car(Object):
             self.speed.set_module(abs(self.vel))
 
         super().physics(time)
+        self.hitbox.x = self.position.x + 19
+        self.hitbox.y = self.position.y + 20
+    
         self.check_teleport()
 
     def move_forward(self, time):

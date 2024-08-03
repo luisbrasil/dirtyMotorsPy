@@ -12,8 +12,8 @@ class Car(Object):
     START_POS = (0, 0)
     DIRECTION_RIGHT = Vector(1, 0)
 
-    def __init__(self, max_vel, rotation_vel, image, screen_width, screen_height):
-        super().__init__(Vector(*self.START_POS), Vector(0, 0))
+    def __init__(self, max_vel, rotation_vel, image, screen_width, screen_height, initial_pos):
+        super().__init__(initial_pos, Vector(0, 0))
         self.max_vel = max_vel
         self.vel = 0
         self.direction = Vector(1, 0)
@@ -23,7 +23,7 @@ class Car(Object):
         self.img = image
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.hitbox = Hitbox(self.position.x + 19, self.position.y + 20, 20)
+        self.hitbox = Hitbox(19, 20, 20, self)
 
     def rotate(self, time: float, left=False, right=False):
         if left:
@@ -52,8 +52,6 @@ class Car(Object):
             self.speed.set_module(abs(self.vel))
 
         super().physics(time)
-        self.hitbox.x = self.position.x + 19
-        self.hitbox.y = self.position.y + 20
     
         self.check_teleport()
 
@@ -81,4 +79,3 @@ class Car(Object):
             self.position.y = 0 - 0.03 * self.screen_width
         elif self.position.y < 0 - 0.03 * self.screen_width:
             self.position.y = self.screen_height
-

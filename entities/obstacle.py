@@ -1,4 +1,5 @@
 import math
+from entities.hitbox import Hitbox
 from entities.vector import Vector
 from entities.object import Object
 from systems.image_rendering import blit_rotate_center
@@ -9,6 +10,7 @@ class Obstacle(Object):
 
     def __init__(self, image):
         super().__init__(Vector(*self.START_POS), Vector(0, 0))
+        self.hitbox = Hitbox(19, 20, 20, self)
         self.img = image
         
 

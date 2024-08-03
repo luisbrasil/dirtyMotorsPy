@@ -3,8 +3,10 @@ import pygame
 from components.assets_port import AssetsPort
 from components.inputs_port import InputsPort
 from entities.bot import Bot
+from entities.object import Object
 from entities.obstacle import Obstacle
 from entities.player import Player
+from entities.vector import Vector
 from systems.image_rendering import scale_image
 
 class Game:
@@ -27,11 +29,12 @@ class Game:
 
         # Initial square position
         playerCar = Player(1000, 3, AssetsPort.BLACK_CAR,
-                        InputsPort.KEY_UP, InputsPort.KEY_LEFT, InputsPort.KEY_DOWN, InputsPort.KEY_RIGHT, WIDTH, HEIGHT)
+                           InputsPort.KEY_UP, InputsPort.KEY_LEFT, InputsPort.KEY_DOWN, InputsPort.KEY_RIGHT, WIDTH, HEIGHT, Vector(0, 0))
         playerCar2 = Player(1000, 3, AssetsPort.GREEN_CAR,
-                         InputsPort.KEY_W, InputsPort.KEY_A, InputsPort.KEY_S, InputsPort.KEY_D, WIDTH, HEIGHT)
-        bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, WIDTH, HEIGHT)
-        bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05, WIDTH, HEIGHT)
+                            InputsPort.KEY_W, InputsPort.KEY_A, InputsPort.KEY_S, InputsPort.KEY_D, WIDTH, HEIGHT, Vector(100, 100))
+        bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, WIDTH, HEIGHT, Vector(200, 200))
+        bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,
+                   WIDTH, HEIGHT,  Vector(300, 300))
         rockObstacle = Obstacle(AssetsPort.PREDA)
         
         object_list = [playerCar, playerCar2, bot, bot2, rockObstacle]
@@ -66,9 +69,12 @@ class Game:
                     object.handle_input(time)
                 elif type(object) is Player:
                     object.handle_input(time, keys)
-                       
+            
+            Object.check_collisions(object_list)
+            
             for object in object_list:
                 object.physics(time)
+            
             
             for object in object_list:
                 object.draw(screen) 

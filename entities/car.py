@@ -23,7 +23,7 @@ class Car(Object):
         self.img = image
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.hitbox = Hitbox(19, 20, 20, self)
+        self.hitbox = Hitbox(19, 20, 10, self)
 
     def rotate(self, time: float, left=False, right=False):
         if left:

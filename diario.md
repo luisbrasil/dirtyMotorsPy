@@ -21,3 +21,9 @@ Dia 31/07
     Finalizado correções gerais indicadas pelo professor Eduardo;
     Adicionado musica de fundo para o jogo;
 
+Dia 02/08
+    Finalizado implementação hitbox;
+    Iniciado implementação da Colisão;
+
+Dia 07/08
+    Iniciado ajustes na colisão sugeridos pelo professor Eduardo;

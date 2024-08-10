@@ -37,7 +37,7 @@ class Game:
                    WIDTH, HEIGHT,  Vector(300, 300))
         rockObstacle = Obstacle(AssetsPort.PREDA)
         
-        object_list = [playerCar, playerCar2, bot, bot2, rockObstacle]
+        object_list = [playerCar, playerCar2]
 
         # Set up clock to control the frame rate
         clock = pygame.time.Clock()

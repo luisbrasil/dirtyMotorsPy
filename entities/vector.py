@@ -12,13 +12,15 @@ class Vector:
         return Vector(self.x + other.x, self.y + other.y)
 
     def __mul__(self, scalar: float):
-        self.
         self.x = self.x * scalar
         self.y = self.y * scalar
             
     def __div__(self, scalar: float):
         self.x = self.x/scalar
         self.y = self.y/scalar
+        
+    def __str__(self):
+        return "x: "+str(self.x)+" y: "+str(self.y)
         
     def length(self):
         return math.sqrt(self.x**2 + self.y**2)

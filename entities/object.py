@@ -13,8 +13,10 @@ class Object:
         self.position.y -= self.speed.y * time
         
     def teleport(self, distance):
-        offset = self.direction * distance
-        self.position = self.position + offset
+        if(hasattr(self, "direction")):
+            offset = Vector(self.direction.x * distance,
+                            self.direction.y * distance)
+            self.position = self.position + offset
 
     @staticmethod
     def check_collisions(objects):
@@ -27,7 +29,11 @@ class Object:
     @staticmethod
     def handle_collision(obj1, obj2):
         collision_vector = obj1.position - obj2.position
+        print(str(collision_vector))
+        
         collision_vector.normalize()
+        print(str(collision_vector))
+
         
         if (hasattr(obj1, "direction")):
             obj1.direction = obj1.direction.reflect(collision_vector)
@@ -41,9 +47,9 @@ class Object:
         if (hasattr(obj2,"angle")):
             obj2.angle += math.atan2(obj2.direction.y, obj2.direction.x)
         
-        teleport_distance = 10
-        obj1.teleport(-teleport_distance)
-        obj2.teleport(-teleport_distance)
+        teleport_distance = -10
+        obj1.teleport(teleport_distance)
+        obj2.teleport(teleport_distance)
         
         obj1.vel = 50
         obj2.vel = 50

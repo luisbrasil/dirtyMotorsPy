@@ -27,3 +27,6 @@ Dia 02/08
 
 Dia 07/08
     Iniciado ajustes na colisão sugeridos pelo professor Eduardo;
+
+Dia 09/08
+    Continuado implementação das sugestões do professor Eduardo;

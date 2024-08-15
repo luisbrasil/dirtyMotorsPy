@@ -1,3 +1,4 @@
+import copy
 import math
 from entities.vector import Vector
 
@@ -31,28 +32,29 @@ class Object:
         collision_vector = obj1.position - obj2.position
         print(str(collision_vector))
         
-        collision_vector.normalize()
-        print(str(collision_vector))
-
+        teleport_vector = copy.copy(collision_vector) 
         
-        if (hasattr(obj1, "direction")):
-            obj1.direction = obj1.direction.reflect(collision_vector)
+        teleport_vector.set_module((obj1.hitbox.radius + obj2.hitbox.radius) - collision_vector.module()) 
+        teleport_vector.x = teleport_vector.x * 0.5
+        teleport_vector.y = teleport_vector.y * 0.5
         
-        if (hasattr(obj2,"direction")):
-            obj2.direction = obj2.direction.reflect(collision_vector)
+        # if (hasattr(obj1, "direction")):
+        #     obj1.direction.x = collision_vector.x
+        #     obj1.direction.y = collision_vector.y
         
-        if (hasattr(obj1,"angle")):
-            obj1.angle += math.atan2(obj1.direction.y, obj1.direction.x)
+        # if (hasattr(obj2,"direction")):
+        #     obj2.direction.x = collision_vector.x
+        #     obj2.direction.y = collision_vector.y
+        #     obj2.direction * -1
+        
+        # if (hasattr(obj1,"angle")):
+        #     obj1.angle = math.atan2(obj1.direction.y, obj1.direction.x)
             
-        if (hasattr(obj2,"angle")):
-            obj2.angle += math.atan2(obj2.direction.y, obj2.direction.x)
+        # if (hasattr(obj2,"angle")):
+        #     obj2.angle = math.atan2(obj2.direction.y, obj2.direction.x)
         
-        teleport_distance = -10
-        obj1.teleport(teleport_distance)
-        obj2.teleport(teleport_distance)
-        
-        obj1.vel = 50
-        obj2.vel = 50
+        obj1.position += teleport_vector
+        obj2.position -= teleport_vector
         
         
         print(f"Colisão detectada entre objeto {obj1} e objeto {obj2}")

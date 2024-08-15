@@ -40,10 +40,6 @@ class Vector:
     
     def dot(self, other):
         return self.x * other.x + self.y * other.y
-
-    def reflect(self, normal):
-        dot_product = self.dot(normal)
-        return Vector(self.x - 2 * dot_product * normal.x, self.y - 2 * dot_product * normal.y)
     
     @staticmethod
     def prod_int(v1, v2):

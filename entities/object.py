@@ -4,14 +4,18 @@ from entities.vector import Vector
 
 
 class Object:
-    def __init__(self, position, speed):
+    def __init__(self, position, speed, mass, vel):
         self.position: Vector = position
         self.speed: Vector = speed
         self.hitbox = None  # Defina a hitbox conforme necessário
+        self.mass = mass
+        self.vel = vel
 
     def physics(self, time: float):
         self.position.x += self.speed.x * time
         self.position.y -= self.speed.y * time
+        
+        self.kineticForce = (self.mass * (self.speed * self.speed))/2
         
     def teleport(self, distance):
         if(hasattr(self, "direction")):

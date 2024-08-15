@@ -12,7 +12,7 @@ class Car(Object):
     START_POS = (0, 0)
     DIRECTION_RIGHT = Vector(1, 0)
 
-    def __init__(self, max_vel, rotation_vel, image, screen_width, screen_height, initial_pos):
+    def __init__(self, mass, max_vel, rotation_vel, image, screen_width, screen_height, initial_pos):
         super().__init__(initial_pos, Vector(0, 0))
         self.max_vel = max_vel
         self.vel = 0
@@ -24,6 +24,8 @@ class Car(Object):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.hitbox = Hitbox(19, 20, 10, self)
+        self.mass = mass
+        
 
     def rotate(self, time: float, left=False, right=False):
         if left:

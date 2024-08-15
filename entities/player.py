@@ -3,8 +3,8 @@ from entities.vector import Vector
 
 
 class Player(Car):
-    def __init__(self, max_vel, rotation_vel, image, key_up, key_left, key_down, key_right, screen_width, screen_height, initial_pos):
-        super().__init__(max_vel, rotation_vel, image,
+    def __init__(self, mass, max_vel, rotation_vel, image, key_up, key_left, key_down, key_right, screen_width, screen_height, initial_pos):
+        super().__init__(mass, max_vel, rotation_vel, image,
                          screen_width, screen_height, initial_pos)
         self.key_up = key_up
         self.key_down = key_down

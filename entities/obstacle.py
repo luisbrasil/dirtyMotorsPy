@@ -8,8 +8,8 @@ from systems.image_rendering import blit_rotate_center
 class Obstacle(Object):
     START_POS = (150, 150)
 
-    def __init__(self, image):
-        super().__init__(Vector(*self.START_POS), Vector(0, 0))
+    def __init__(self, image, mass):
+        super().__init__(Vector(*self.START_POS), Vector(0, 0), mass)
         self.hitbox = Hitbox(19, 20, 20, self)
         self.img = image
         

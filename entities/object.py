@@ -4,18 +4,18 @@ from entities.vector import Vector
 
 
 class Object:
-    def __init__(self, position, speed, mass, vel):
+    def __init__(self, position, speed, mass):
         self.position: Vector = position
         self.speed: Vector = speed
         self.hitbox = None  # Defina a hitbox conforme necessário
         self.mass = mass
-        self.vel = vel
+        self.vel = 0
 
     def physics(self, time: float):
         self.position.x += self.speed.x * time
         self.position.y -= self.speed.y * time
         
-        self.kineticForce = (self.mass * (self.speed * self.speed))/2
+        self.kineticForce = (self.mass * (self.vel * self.vel))/2
         
     def teleport(self, distance):
         if(hasattr(self, "direction")):
@@ -34,6 +34,9 @@ class Object:
     @staticmethod
     def handle_collision(obj1, obj2):
         collision_vector = obj1.position - obj2.position
+        kineticForce = (obj1.kineticForce + obj2.kineticForce) / 2
+        obj1.vel = obj1.vel + kineticForce
+        obj2.vel = obj2.vel + kineticForce
         print(str(collision_vector))
         
         teleport_vector = copy.copy(collision_vector) 

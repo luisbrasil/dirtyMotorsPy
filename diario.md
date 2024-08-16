@@ -1,3 +1,12 @@
+Dia 03/07
+    Ajustes na física com basenas correções sugeridas pelo professor Eduardo;
+
+Dia 05/07
+    Implementação vetor velocidade à fisica ajuste na rotação do Carro;
+
+Dia 10/07
+    Mais ajustes na física de direção dos carros;
+
 Dia 12/07
     Ajustes estruturais para se basear na Onion Architeture, correção de bug na ré;
 

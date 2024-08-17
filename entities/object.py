@@ -46,21 +46,24 @@ class Object:
         teleport_vector.x = teleport_vector.x * 0.5
         teleport_vector.y = teleport_vector.y * 0.5
         
-        # if (hasattr(obj1, "direction")):
-        #     obj1.direction.x = collision_vector.x
-        #     obj1.direction.y = collision_vector.y
-        #     obj1.direction * -1
+        newDirection = copy.copy(collision_vector)
+        newDirection.set_module(1)
         
-        # if (hasattr(obj2,"direction")):
-        #     obj2.direction.x = collision_vector.x
-        #     obj2.direction.y = collision_vector.y
+        if (hasattr(obj1, "direction")):
+            obj1.direction.x = newDirection.x
+            obj1.direction.y = newDirection.y
+            obj1.direction * -1
+        
+        if (hasattr(obj2,"direction")):
+            obj2.direction.x = newDirection.x
+            obj2.direction.y = newDirection.y
             
         
-        # if (hasattr(obj1,"angle")):
-        #     obj1.angle = math.atan2(obj1.direction.y, obj1.direction.x)
+        if (hasattr(obj1,"angle")):
+            obj1.angle = math.atan2(obj1.direction.y, obj1.direction.x)
             
-        # if (hasattr(obj2,"angle")):
-        #     obj2.angle = math.atan2(obj2.direction.y, obj2.direction.x)
+        if (hasattr(obj2,"angle")):
+            obj2.angle = math.atan2(obj2.direction.y, obj2.direction.x)
         
         obj1.position += teleport_vector
         obj2.position -= teleport_vector

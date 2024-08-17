@@ -34,9 +34,10 @@ class Object:
     @staticmethod
     def handle_collision(obj1, obj2):
         collision_vector = obj1.position - obj2.position
+        
         kineticForce = (obj1.kineticForce + obj2.kineticForce) / 2
-        obj1.vel = obj1.vel + kineticForce
-        obj2.vel = obj2.vel + kineticForce
+        obj1.vel = math.sqrt((2*kineticForce)/obj1.mass)
+        obj2.vel = math.sqrt((2*kineticForce)/obj2.mass)
         print(str(collision_vector))
         
         teleport_vector = copy.copy(collision_vector) 
@@ -48,11 +49,12 @@ class Object:
         # if (hasattr(obj1, "direction")):
         #     obj1.direction.x = collision_vector.x
         #     obj1.direction.y = collision_vector.y
+        #     obj1.direction * -1
         
         # if (hasattr(obj2,"direction")):
         #     obj2.direction.x = collision_vector.x
         #     obj2.direction.y = collision_vector.y
-        #     obj2.direction * -1
+            
         
         # if (hasattr(obj1,"angle")):
         #     obj1.angle = math.atan2(obj1.direction.y, obj1.direction.x)

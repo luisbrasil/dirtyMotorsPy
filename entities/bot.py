@@ -6,8 +6,8 @@ from entities.vector import Vector
 
 
 class Bot(Car):
-    def __init__(self, max_vel, rotation_vel, image, bot_action_interval, screen_width, screen_height, initial_pos):
-        super().__init__(max_vel, rotation_vel, image,
+    def __init__(self, mass, max_vel, rotation_vel, image, bot_action_interval, screen_width, screen_height, initial_pos):
+        super().__init__(mass, max_vel, rotation_vel, image,
                          screen_width, screen_height, initial_pos)
 
         self.bot_action_interval = bot_action_interval

@@ -1,5 +1,7 @@
 import copy
 import math
+import os
+import pygame
 from entities.vector import Vector
 
 
@@ -10,6 +12,7 @@ class Object:
         self.hitbox = None  # Defina a hitbox conforme necessário
         self.mass = mass
         self.vel = 0
+        pygame.init()
 
     def physics(self, time: float):
         self.position.x += self.speed.x * time
@@ -33,6 +36,9 @@ class Object:
 
     @staticmethod
     def handle_collision(obj1, obj2):
+        engine = pygame.mixer.Sound(
+            os.path.join('assets/sounds', 'tuc.mp3'))
+        pygame.mixer.Sound.play(engine)
         collision_vector = obj1.position - obj2.position
         
         # kineticForce = (obj1.kineticForce + obj2.kineticForce) / 2

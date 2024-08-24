@@ -1,4 +1,5 @@
 import math
+import os
 from components.inputs_port import InputsPort
 from entities.hitbox import Hitbox
 from entities.object import Object
@@ -7,6 +8,7 @@ from systems.image_rendering import blit_rotate_center
 from enum import Enum
 import random
 import time as py_time
+import pygame
 
 class Car(Object):
     START_POS = (0, 0)
@@ -23,6 +25,7 @@ class Car(Object):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.hitbox = Hitbox(19, 20, 10, self)
+        pygame.init()
         
 
     def rotate(self, time: float, left=False, right=False):
@@ -56,17 +59,25 @@ class Car(Object):
         self.check_teleport()
 
     def move_forward(self, time):
+        if self.vel == 0:
+           self.play_engine_sound()
         acceleration = (5 if self.vel < 0 else 1) * self.acceleration
         self.vel = min(self.vel + acceleration, self.max_vel)
 
     def move_backward(self, time):
+        if self.vel == 0:
+           self.play_engine_sound()
         acceleration = (5 if self.vel > 0 else 1) * self.acceleration
         self.vel = max(self.vel - acceleration, -self.max_vel / 2)
 
     def reduce_speed(self, time):
         self.vel = max(self.vel - self.acceleration / 2,
                        0) if self.vel > 0 else min(self.vel + self.acceleration / 2, 0)
-
+        
+    def play_engine_sound(self):
+        engine = pygame.mixer.Sound(os.path.join('assets/sounds', 'car_start.mp3'))
+        pygame.mixer.Sound.play(engine)
+        
     def draw(self, win):
         blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(self.angle))
 

@@ -1,4 +1,6 @@
 import sys
+import os
+from systems.animations import CollisionAnimation
 import pygame
 from components.assets_port import AssetsPort
 from components.inputs_port import InputsPort
@@ -16,8 +18,28 @@ class Game:
         pygame.mixer.music.load('assets\Thunderstruck.mp3')
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play()
+        self.object_list = []
+        self.collision_frames = []
+        self.load_collision_frames()
+        self.collision_animation = None
     
-    
+    def load_collision_frames(self):
+        for i in range(1, 7):
+            image_path = os.path.join('assets/sprites/animated/explosion', f'frame{i}.png')
+            frame = pygame.image.load(image_path)
+            self.collision_frames.append(frame)
+            
+    def update(self):
+        if self.collision_animation:
+            self.collision_animation.update()
+            
+    def draw(self, surface):
+        for object in self.object_list:
+            object.draw(surface)
+            
+        if self.collision_animation:
+            self.collision_animation.draw(surface)
+
     def run(self):
         # Initialize Pygame
         # Constants
@@ -38,7 +60,8 @@ class Game:
                    WIDTH, HEIGHT,  Vector(300, 300), 1)
         rockObstacle = Obstacle(50000,AssetsPort.PREDA)
         
-        object_list = [playerCar, playerCar2]
+        self.object_list.append(playerCar)
+        self.object_list.append(playerCar2)
 
         # Set up clock to control the frame rate
         clock = pygame.time.Clock()
@@ -65,20 +88,19 @@ class Game:
             # Renderize the background image
             screen.blit(background_image, (0, 0))
             
-            for object in object_list:
+            for object in self.object_list:
                 if type(object) is Bot:
                     object.handle_input(time)
                 elif type(object) is Player:
                     object.handle_input(time, keys)
             
-            Object.check_collisions(object_list)
+            Object.check_collisions(self.object_list)
             
-            for object in object_list:
+            for object in self.object_list:
+                CollisionAnimation(self.collision_frames, object.position)
                 object.physics(time)
-            
-            
-            for object in object_list:
-                object.draw(screen) 
+
+            self.draw(screen)
             
             # Update the display
             pygame.display.flip()

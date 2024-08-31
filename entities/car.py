@@ -25,6 +25,7 @@ class Car(Object):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.hitbox = Hitbox(19, 20, 10, self)
+        self.health = 100
         pygame.init()
         
 

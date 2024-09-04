@@ -3,13 +3,14 @@ from entities.vector import Vector
 
 
 class Player(Car):
-    def __init__(self, max_vel, rotation_vel, image, key_up, key_left, key_down, key_right, screen_width, screen_height, initial_pos, mass):
+    def __init__(self, max_vel, rotation_vel, image, key_up, key_left, key_down, key_right, key_hit, screen_width, screen_height, initial_pos, mass):
         super().__init__(max_vel, rotation_vel, image,
                          screen_width, screen_height, initial_pos, mass)
         self.key_up = key_up
         self.key_down = key_down
         self.key_left = key_left
         self.key_right = key_right
+        self.key_hit = key_hit
 
     def handle_input(self, time, keys):
         moved = False
@@ -23,5 +24,7 @@ class Player(Car):
         if keys[self.key_down]:
             moved = True
             self.move_backward(time)
+        if keys[self.key_hit]:
+            self.move_forward(time)
         if not moved:
             self.reduce_speed(time)

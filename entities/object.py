@@ -3,6 +3,7 @@ import math
 import os
 import pygame
 from entities.vector import Vector
+from systems.animations import CollisionAnimation
 
 
 class Object:
@@ -27,12 +28,15 @@ class Object:
             self.position = self.position + offset
 
     @staticmethod
-    def check_collisions(objects):
-        num_objects = len(objects)
+    def check_collisions(game_instance):
+        num_objects = len(game_instance.object_list)
         for i in range(num_objects):
             for j in range(i + 1, num_objects):
-                if objects[i].hitbox.check_collision(objects[j].hitbox):
-                    Object.handle_collision(objects[i], objects[j])
+                if game_instance.object_list[i].hitbox.check_collision(game_instance.object_list[j].hitbox):
+                    Object.handle_collision(game_instance.object_list[i], game_instance.object_list[j])
+                    collision_position = (game_instance.object_list[i].position.x + game_instance.object_list[j].position.x) / 2, (game_instance.object_list[i].position.y + game_instance.object_list[j].position.y) / 2
+                    collision_animation = CollisionAnimation(game_instance.collision_frames, collision_position)
+                    game_instance.collision_animations.append(collision_animation)
 
     @staticmethod
     def handle_collision(obj1, obj2):

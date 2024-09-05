@@ -21,7 +21,7 @@ class Game:
         self.object_list = []
         self.collision_frames = []
         self.load_collision_frames()
-        self.collision_animation = None
+        self.collision_animations = []
     
     def load_collision_frames(self):
         for i in range(1, 7):
@@ -30,15 +30,22 @@ class Game:
             self.collision_frames.append(frame)
             
     def update(self):
-        if self.collision_animation:
-            self.collision_animation.update()
+        # Atualizar todas as animações de colisão
+        for animation in self.collision_animations:
+            animation.update()
+            
+        # Remover animações concluídas
+        self.collision_animations = [anim for anim in self.collision_animations if anim.current_frame < len(anim.frames) - 1]
+
             
     def draw(self, surface):
+        self.update()
         for object in self.object_list:
             object.draw(surface)
-            
-        if self.collision_animation:
-            self.collision_animation.draw(surface)
+        
+        # Desenhar todas as animações de colisão
+        for animation in self.collision_animations:
+            animation.draw(surface)
 
     def run(self):
         # Initialize Pygame
@@ -94,10 +101,10 @@ class Game:
                 elif type(object) is Player:
                     object.handle_input(time, keys)
             
-            Object.check_collisions(self.object_list)
+            Object.check_collisions(self)
             
             for object in self.object_list:
-                CollisionAnimation(self.collision_frames, object.position)
+                self.collision_animation = CollisionAnimation(self.collision_frames, object.position)
                 object.physics(time)
 
             self.draw(screen)

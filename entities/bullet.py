@@ -1,15 +1,17 @@
 import pygame
 
+from entities.object import Object
 
-class Bullet:
-    def __init__(self, x, y, direction):
-        self.x = x
-        self.y = y
+
+class Bullet(Object):
+    def __init__(self, direction, pos, speed, mass):
+        super().__init__(pos, speed, mass)
         self.direction = direction
-        self.speed = 10
         self.image = pygame.Surface((10, 5))
         self.image.fill((255, 0, 0))  # Cor do tiro (vermelho)
-        self.rect = self.image.get_rect(center=(x, y))
+        self.rect = self.image.get_rect(center=(pos.x, pos.y))
+        self.x = 0
+        self.y = 0
 
     def update(self):
         # Atualiza a posição do projétil com base no vetor de direção e velocidade

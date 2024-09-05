@@ -34,7 +34,7 @@ class Player(Car):
 
     def shoot(self):
         direction = self.get_direction()
-        bullet = Bullet(self.position.x, self.position.y, direction)
+        bullet = Bullet(direction, self.position, 15, 10)
         self.bullets.append(bullet)
         print(bullet)
         

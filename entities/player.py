@@ -33,8 +33,8 @@ class Player(Car):
             self.reduce_speed(time)
 
     def shoot(self):
-        angle = self.get_angle()
-        bullet = Bullet(self.position.x, self.position.y, angle)
+        direction = self.get_direction()
+        bullet = Bullet(self.position.x, self.position.y, direction)
         self.bullets.append(bullet)
         print(bullet)
         

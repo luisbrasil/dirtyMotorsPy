@@ -15,7 +15,7 @@ class Game:
     
     def __init__(self):
         pygame.init()
-        pygame.mixer.music.load('assets\Thunderstruck.mp3')
+        pygame.mixer.music.load('assets\paranoid.mp3')
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play()
         self.object_list = []
@@ -59,9 +59,9 @@ class Game:
 
         # Initial square position
         playerCar = Player(1000, 3, AssetsPort.BLACK_CAR,
-                           InputsPort.KEY_UP, InputsPort.KEY_LEFT, InputsPort.KEY_DOWN, InputsPort.KEY_RIGHT, WIDTH, HEIGHT, Vector(0, 0),100)
+                           InputsPort.KEY_UP, InputsPort.KEY_LEFT, InputsPort.KEY_DOWN, InputsPort.KEY_RIGHT, InputsPort.KEY_ONE, WIDTH, HEIGHT, Vector(0, 0),100)
         playerCar2 = Player(1000, 3, AssetsPort.GREEN_CAR,
-                            InputsPort.KEY_W, InputsPort.KEY_A, InputsPort.KEY_S, InputsPort.KEY_D, WIDTH, HEIGHT, Vector(100, 100),100)
+                            InputsPort.KEY_W, InputsPort.KEY_A, InputsPort.KEY_S, InputsPort.KEY_D, InputsPort.KEY_Q, WIDTH, HEIGHT, Vector(100, 100),100)
         bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, WIDTH, HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,
                    WIDTH, HEIGHT,  Vector(300, 300), 1)

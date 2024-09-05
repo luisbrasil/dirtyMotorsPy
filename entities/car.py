@@ -26,9 +26,6 @@ class Car(Object):
         self.screen_height = screen_height
         self.hitbox = Hitbox(19, 20, 10, self)
         pygame.init()
-        
-    def get_direction(self):
-        return self.direction
 
     def rotate(self, time: float, left=False, right=False):
         if left:

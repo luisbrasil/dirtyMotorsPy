@@ -27,6 +27,8 @@ class Car(Object):
         self.hitbox = Hitbox(19, 20, 10, self)
         pygame.init()
         
+    def get_angle(self):
+        return self.angle
 
     def rotate(self, time: float, left=False, right=False):
         if left:

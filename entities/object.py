@@ -41,11 +41,6 @@ class Object:
         pygame.mixer.Sound.play(engine)
         collision_vector = obj1.position - obj2.position
         
-        # kineticForce = (obj1.kineticForce + obj2.kineticForce) / 2
-        # obj1.vel = math.sqrt((2*kineticForce)/obj1.mass)
-        # obj2.vel = math.sqrt((2*kineticForce)/obj2.mass)
-        # print(str(collision_vector))
-        
         teleport_vector = copy.copy(collision_vector) 
         
         teleport_vector.set_module((obj1.hitbox.radius + obj2.hitbox.radius) - collision_vector.module()) 
@@ -75,5 +70,3 @@ class Object:
             
         if (hasattr(obj2,"angle")):
             obj2.angle = math.atan2(obj2.direction.y, obj2.direction.x)  
-        
-        print(f"Colisão detectada entre objeto {obj1} e objeto {obj2}")

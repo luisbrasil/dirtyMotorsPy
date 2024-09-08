@@ -26,6 +26,9 @@ class Car(Object):
         self.screen_height = screen_height
         self.hitbox = Hitbox(19, 20, 10, self)
         self.health = 100
+        self.is_flashing = False
+        self.flash_duration = 8
+        self.flash_timer = 0
         pygame.init()
         
 
@@ -80,8 +83,16 @@ class Car(Object):
         pygame.mixer.Sound.play(engine)
         
     def draw(self, win):
-        blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(self.angle))
-
+        if self.is_flashing: # Se tomou dano
+            print("flashing")
+            temp_img = self.img.copy()
+            red_overlay = pygame.Surface(temp_img.get_size())
+            red_overlay.fill((255, 0, 0))
+            temp_img.blit(red_overlay, (0, 0), special_flags=pygame.BLEND_MULT)
+            blit_rotate_center(win, temp_img, (self.position.x, self.position.y), math.degrees(self.angle))
+        else:
+            blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(self.angle))
+            
     def check_teleport(self):
         if self.position.x > self.screen_width + 0.03 * self.screen_width:
             self.position.x = 0 - 0.03 * self.screen_width
@@ -91,3 +102,24 @@ class Car(Object):
             self.position.y = 0 - 0.03 * self.screen_width
         elif self.position.y < 0 - 0.03 * self.screen_width:
             self.position.y = self.screen_height
+
+    def takes_damage(self, damage):
+        self.health -= damage
+        self.is_flashing = True
+        self.flash_timer = 0
+        
+        if self.health <= 0:
+            return True  # Retorna que o carro foi explodido
+        return False
+    
+    def update_flash(self, time):
+        if self.is_flashing:
+            self.flash_timer += time
+            print("flash time: "+str(self.flash_timer))
+            print("flash duraiton: "+str(self.flash_duration))
+            if self.flash_timer >= self.flash_duration:
+                self.is_flashing = False
+                
+    def custom_collision_handling(self):
+        self.angle = math.atan2(self.direction.y, self.direction.x)
+        self.takes_damage(0)

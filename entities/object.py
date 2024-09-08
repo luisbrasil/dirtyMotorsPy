@@ -34,9 +34,6 @@ class Object:
             for j in range(i + 1, num_objects):
                 if game_instance.object_list[i].hitbox.check_collision(game_instance.object_list[j].hitbox):
                     Object.handle_collision(game_instance.object_list[i], game_instance.object_list[j])
-                    collision_position = (game_instance.object_list[i].position.x + game_instance.object_list[j].position.x) / 2, (game_instance.object_list[i].position.y + game_instance.object_list[j].position.y) / 2
-                    collision_animation = CollisionAnimation(game_instance.collision_frames, collision_position)
-                    game_instance.collision_animations.append(collision_animation)
 
     @staticmethod
     def handle_collision(obj1, obj2):
@@ -49,7 +46,7 @@ class Object:
         # obj1.vel = math.sqrt((2*kineticForce)/obj1.mass)
         # obj2.vel = math.sqrt((2*kineticForce)/obj2.mass)
         # print(str(collision_vector))
-        
+    
         teleport_vector = copy.copy(collision_vector) 
         
         teleport_vector.set_module((obj1.hitbox.radius + obj2.hitbox.radius) - collision_vector.module()) 
@@ -74,10 +71,10 @@ class Object:
             obj1.vel = obj1.direction.module()
             obj1.direction.normalize()
         
-        if (hasattr(obj1,"angle")):
-            obj1.angle = math.atan2(obj1.direction.y, obj1.direction.x)
-            
-        if (hasattr(obj2,"angle")):
-            obj2.angle = math.atan2(obj2.direction.y, obj2.direction.x)  
-        
+        obj1.custom_collision_handling()
+        obj2.custom_collision_handling()
+
         print(f"Colisão detectada entre objeto {obj1} e objeto {obj2}")
+
+    def custom_collision_handling(self):
+        return

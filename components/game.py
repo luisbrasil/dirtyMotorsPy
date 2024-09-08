@@ -1,5 +1,7 @@
+import json
 import sys
 import os
+from entities.car import Car
 from systems.animations import CollisionAnimation
 import pygame
 from components.assets_port import AssetsPort
@@ -36,7 +38,10 @@ class Game:
             
         # Remover animações concluídas
         self.collision_animations = [anim for anim in self.collision_animations if anim.current_frame < len(anim.frames) - 1]
-
+        
+        for obj in self.object_list:
+            if isinstance(obj, Car):
+                obj.update_flash(pygame.time.get_ticks() / 1000)
             
     def draw(self, surface):
         self.update()
@@ -104,8 +109,10 @@ class Game:
             Object.check_collisions(self)
             
             for object in self.object_list:
-                self.collision_animation = CollisionAnimation(self.collision_frames, object.position)
                 object.physics(time)
+                if object.health <= 0:
+                    self.collision_animations.append(CollisionAnimation(self.collision_frames, object.position))
+                    self.object_list.remove(object)
 
             self.draw(screen)
             

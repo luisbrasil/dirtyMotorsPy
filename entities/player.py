@@ -1,5 +1,7 @@
 from entities.car import Car
 from entities.vector import Vector
+from entities.bullet import Bullet  # Supondo que você tenha um módulo bullet.py
+import copy
 
 
 class Player(Car):
@@ -11,6 +13,7 @@ class Player(Car):
         self.key_left = key_left
         self.key_right = key_right
         self.key_hit = key_hit
+        self.bullets = []  # Inicializa a lista de tiros
 
     def handle_input(self, time, keys):
         moved = False
@@ -25,6 +28,16 @@ class Player(Car):
             moved = True
             self.move_backward(time)
         if keys[self.key_hit]:
-            self.move_forward(time)
+            self.shoot()
+
         if not moved:
             self.reduce_speed(time)
+
+    def shoot(self):
+        # Crie um projétil com base na posição e direção atual
+        bullet = Bullet(copy.copy(self.direction), copy.copy(self.position), 15, 10)
+        self.bullets.append(bullet)
+
+
+
+    

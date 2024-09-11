@@ -17,7 +17,12 @@ class Game:
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play()
     
-    
+    def draw_hit(self, object, screen):
+        for bullet in object.bullets:
+            bullet.update()  # Atualiza a posição do projétil
+            # Desenha o projétil na tela
+            screen.blit(bullet.image, bullet.rect.topleft)
+            
     def run(self):
         # Initialize Pygame
         # Constants
@@ -70,6 +75,7 @@ class Game:
                     object.handle_input(time)
                 elif type(object) is Player:
                     object.handle_input(time, keys)
+                    self.draw_hit(object, screen)
             
             Object.check_collisions(object_list)
             
@@ -85,6 +91,8 @@ class Game:
 
             # Cap the frame rate
             clock.tick(FPS)
+            
+        
 
         # Done! Time to quit.
         pygame.quit()

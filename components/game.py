@@ -31,7 +31,7 @@ class Game:
             frame = pygame.image.load(image_path)
             self.collision_frames.append(frame)
             
-    def update(self):
+    def update(self, time):
         # Atualizar todas as animações de colisão
         for animation in self.collision_animations:
             animation.update()
@@ -41,10 +41,10 @@ class Game:
         
         for obj in self.object_list:
             if isinstance(obj, Car):
-                obj.update_flash(pygame.time.get_ticks() / 1000)
+                obj.update_flash(time)
             
-    def draw(self, surface):
-        self.update()
+    def draw(self, surface, time):
+        self.update(time)
         for object in self.object_list:
             object.draw(surface)
         
@@ -111,10 +111,10 @@ class Game:
             for object in self.object_list:
                 object.physics(time)
                 if object.health <= 0:
-                    self.collision_animations.append(CollisionAnimation(self.collision_frames, object.position))
+                   #self.collision_animations.append(CollisionAnimation(self.collision_frames, object.position))
                     self.object_list.remove(object)
 
-            self.draw(screen)
+            self.draw(screen, time)
             
             # Update the display
             pygame.display.flip()

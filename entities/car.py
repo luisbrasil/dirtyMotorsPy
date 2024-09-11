@@ -22,12 +22,20 @@ class Car(Object):
         self.angle = 0
         self.acceleration = 5
         self.img = image
+        
+        #Criando imagem de dano
+        tkdmg_img = self.img.copy()
+        red_overlay = pygame.Surface(tkdmg_img.get_size())
+        red_overlay.fill((255, 0, 0))
+        tkdmg_img.blit(red_overlay, (0, 0), special_flags=pygame.BLEND_MULT)
+        self.tkdmg_img = tkdmg_img
+        
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.hitbox = Hitbox(19, 20, 10, self)
         self.health = 100
         self.is_flashing = False
-        self.flash_duration = 8
+        self.flash_duration = 0.06
         self.flash_timer = 0
         pygame.init()
         
@@ -84,12 +92,7 @@ class Car(Object):
         
     def draw(self, win):
         if self.is_flashing: # Se tomou dano
-            print("flashing")
-            temp_img = self.img.copy()
-            red_overlay = pygame.Surface(temp_img.get_size())
-            red_overlay.fill((255, 0, 0))
-            temp_img.blit(red_overlay, (0, 0), special_flags=pygame.BLEND_MULT)
-            blit_rotate_center(win, temp_img, (self.position.x, self.position.y), math.degrees(self.angle))
+            blit_rotate_center(win, self.tkdmg_img, (self.position.x, self.position.y), math.degrees(self.angle))
         else:
             blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(self.angle))
             
@@ -115,11 +118,9 @@ class Car(Object):
     def update_flash(self, time):
         if self.is_flashing:
             self.flash_timer += time
-            print("flash time: "+str(self.flash_timer))
-            print("flash duraiton: "+str(self.flash_duration))
             if self.flash_timer >= self.flash_duration:
                 self.is_flashing = False
                 
     def custom_collision_handling(self):
         self.angle = math.atan2(self.direction.y, self.direction.x)
-        self.takes_damage(0)
+        self.takes_damage(25)

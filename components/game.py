@@ -1,8 +1,10 @@
+import math
 import sys
 import pygame
 from components.assets_port import AssetsPort
 from components.inputs_port import InputsPort
 from entities.bot import Bot
+from entities.bullet import Bullet
 from entities.object import Object
 from entities.obstacle import Obstacle
 from entities.player import Player
@@ -17,12 +19,7 @@ class Game:
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play()
     
-    def draw_hit(self, object, screen):
-        for bullet in object.bullets:
-            bullet.update()  # Atualiza a posição do projétil
-            # Desenha o projétil na tela
-            screen.blit(bullet.image, bullet.rect.topleft)
-            
+
     def run(self):
         # Initialize Pygame
         # Constants
@@ -75,7 +72,9 @@ class Game:
                     object.handle_input(time)
                 elif type(object) is Player:
                     object.handle_input(time, keys)
-                    self.draw_hit(object, screen)
+                    for bullet in object.bullets:
+                        object_list.append(bullet)
+                    
             
             Object.check_collisions(object_list)
             

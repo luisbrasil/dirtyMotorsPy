@@ -35,7 +35,7 @@ class Player(Car):
 
     def shoot(self):
         # Crie um projétil com base na posição e direção atual
-        bullet = Bullet(copy.copy(self.direction), copy.copy(self.position), 15, 10)
+        bullet = Bullet(copy.copy(self.direction), copy.copy(self.position), copy.copy(self.speed), 10, copy.copy(self.angle))
         self.bullets.append(bullet)
 
 

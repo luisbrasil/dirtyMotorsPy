@@ -10,7 +10,7 @@ class Hitbox:
         self.object = object
          
     def draw(self, win):
-        pygame.draw.circle(win, (255, 0, 0), (self.object.x + self.x, self.object.y + self.y), self.radius, 2)
+        pygame.draw.circle(win, (255, 0, 0), (self.object.position.x + self.x, self.object.position.y + self.y), self.radius, 2)
         
     def check_collision(self, other):
         dx = (self.object.position.x + self.x) - (other.object.position.x + other.x)

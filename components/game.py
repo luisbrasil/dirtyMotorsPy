@@ -61,7 +61,7 @@ class Game:
             
             # Load the background image
             background_image = pygame.image.load(
-                "assets/sprites/RacingTrack.png")
+                "assets/sprites/PokeArena.png")
 
             # Scale the background image to fit the screen size
             background_image = pygame.transform.scale(

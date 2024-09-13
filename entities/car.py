@@ -24,7 +24,7 @@ class Car(Object):
         self.img = image
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.hitbox = Hitbox(19, 20, 10, self)
+        self.hitbox = Hitbox(0, 0, 10, self)
         pygame.init()
 
     def rotate(self, time: float, left=False, right=False):

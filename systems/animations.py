@@ -15,4 +15,4 @@ class CollisionAnimation:
             self.last_update = now
 
     def draw(self, surface):
-        surface.blit(self.frames[self.current_frame], self.position)
+        surface.blit(self.frames[self.current_frame], (self.position.x, self.position.y))

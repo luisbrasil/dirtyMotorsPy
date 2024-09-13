@@ -111,7 +111,7 @@ class Game:
             for object in self.object_list:
                 object.physics(time)
                 if object.health <= 0:
-                   #self.collision_animations.append(CollisionAnimation(self.collision_frames, object.position))
+                    self.collision_animations.append(CollisionAnimation(self.collision_frames, object.position))
                     self.object_list.remove(object)
 
             self.draw(screen, time)

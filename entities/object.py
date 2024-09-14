@@ -12,6 +12,7 @@ class Object:
         self.hitbox = None  # Defina a hitbox conforme necessário
         self.mass = mass
         self.vel = 0
+        self.dispose = False
         pygame.init()
 
     def physics(self, time: float):

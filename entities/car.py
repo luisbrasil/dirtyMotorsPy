@@ -1,6 +1,8 @@
+import copy
 import math
 import os
 from components.inputs_port import InputsPort
+from entities.bullet import Bullet
 from entities.hitbox import Hitbox
 from entities.object import Object
 from entities.vector import Vector
@@ -25,6 +27,7 @@ class Car(Object):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.hitbox = Hitbox(0, 0, 10, self)
+        self.bullets = []  # Inicializa a lista de tiros
         pygame.init()
 
     def rotate(self, time: float, left=False, right=False):
@@ -85,7 +88,11 @@ class Car(Object):
             self.position.x = 0 - 0.03 * self.screen_width
         elif self.position.x < 0 - 0.03 * self.screen_width:
             self.position.x = self.screen_width
-        if self.position.y > self.screen_height + 0.03 * self.screen_width:
-            self.position.y = 0 - 0.03 * self.screen_width
-        elif self.position.y < 0 - 0.03 * self.screen_width:
+        if self.position.y > self.screen_height + 0.03 * self.screen_height:
+            self.position.y = 0 - 0.03 * self.screen_height
+        elif self.position.y < 0 - 0.03 * self.screen_height:
             self.position.y = self.screen_height
+
+    def shoot(self):
+        bullet = Bullet(self)
+        self.bullets.append(bullet)

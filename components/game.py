@@ -73,13 +73,18 @@ class Game:
                 elif type(object) is Player:
                     object.handle_input(time, keys)
                     for bullet in object.bullets:
-                        object_list.append(bullet)
+                        if bullet not in object_list:
+                            object_list.append(bullet)
                     
             
-            Object.check_collisions(object_list)
+            #Object.check_collisions(object_list)
             
             for object in object_list:
-                object.physics(time)
+                if(object.dispose):
+                    object_list.remove(object)
+                    print("bala removida")
+                else:
+                    object.physics(time)
             
             
             for object in object_list:

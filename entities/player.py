@@ -13,7 +13,6 @@ class Player(Car):
         self.key_left = key_left
         self.key_right = key_right
         self.key_hit = key_hit
-        self.bullets = []  # Inicializa a lista de tiros
 
     def handle_input(self, time, keys):
         moved = False
@@ -32,12 +31,3 @@ class Player(Car):
 
         if not moved:
             self.reduce_speed(time)
-
-    def shoot(self):
-        # Crie um projétil com base na posição e direção atual
-        bullet = Bullet(copy.copy(self.direction), copy.copy(self.position), copy.copy(self.speed), 10, copy.copy(self.angle))
-        self.bullets.append(bullet)
-
-
-
-    

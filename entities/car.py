@@ -1,16 +1,14 @@
-import copy
 import math
 import os
-from components.inputs_port import InputsPort
+
+import pygame
+
 from entities.bullet import Bullet
 from entities.hitbox import Hitbox
 from entities.object import Object
 from entities.vector import Vector
 from systems.image_rendering import blit_rotate_center
-from enum import Enum
-import random
-import time as py_time
-import pygame
+
 
 class Car(Object):
     START_POS = (0, 0)
@@ -36,20 +34,20 @@ class Car(Object):
         elif right:
             self.angle -= self.rotation_vel * time
 
-        cosAngle = math.cos(self.angle)
-        sinAngle = math.sin(self.angle)
+        cos_angle = math.cos(self.angle)
+        sin_angle = math.sin(self.angle)
 
-        self.direction.x = cosAngle * self.DIRECTION_RIGHT.x - \
-            sinAngle * self.DIRECTION_RIGHT.y
-        self.direction.y = sinAngle * self.DIRECTION_RIGHT.x + \
-            cosAngle * self.DIRECTION_RIGHT.y
+        self.direction.x = cos_angle * self.DIRECTION_RIGHT.x - \
+            sin_angle * self.DIRECTION_RIGHT.y
+        self.direction.y = sin_angle * self.DIRECTION_RIGHT.x + \
+            cos_angle * self.DIRECTION_RIGHT.y
 
     def physics(self, time: float):
         if self.vel == 0:
             self.speed = Vector(0, 0)
         elif self.vel < 0:
-            self.speed.x = -(self.direction.x)
-            self.speed.y = -(self.direction.y)
+            self.speed.x = -self.direction.x
+            self.speed.y = -self.direction.y
             self.speed.set_module(abs(self.vel))
         else:
             self.speed.x = self.direction.x
@@ -76,7 +74,8 @@ class Car(Object):
         self.vel = max(self.vel - self.acceleration / 2,
                        0) if self.vel > 0 else min(self.vel + self.acceleration / 2, 0)
         
-    def play_engine_sound(self):
+    @staticmethod
+    def play_engine_sound():
         engine = pygame.mixer.Sound(os.path.join('assets/sounds', 'car_start.mp3'))
         pygame.mixer.Sound.play(engine)
         

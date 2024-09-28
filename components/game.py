@@ -82,7 +82,6 @@ class Game:
             for object in object_list:
                 if(object.dispose):
                     object_list.remove(object)
-                    print("bala removida")
                 else:
                     object.physics(time)
             

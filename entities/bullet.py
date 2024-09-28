@@ -11,8 +11,8 @@ from entities.object import Object
 
 class Bullet(Object):
     def __init__(self, car):
-        shootPosition = Vector(car.position.x + car.direction.x, car.position.y + car.direction.y)
-        super().__init__(shootPosition, Vector(car.direction.x * 1000, car.direction.y * 1000), 10)
+        shoot_position = Vector(car.position.x + car.direction.x, car.position.y + car.direction.y)
+        super().__init__(shoot_position, Vector(car.direction.x * 1000, car.direction.y * 1000), 10)
         self.direction = copy.copy(car.direction)
         self.image = pygame.Surface((10, 5))
         self.image.fill((255, 0, 0))  # Cor do tiro (vermelho)
@@ -34,7 +34,7 @@ class Bullet(Object):
     def check_left_screen(self):
         screen_width, screen_height = pygame.display.get_surface().get_size()
         if (self.position.x > screen_width + 0.03 * screen_width) or (self.position.x < 0 - 0.03 * screen_width) or (self.position.y > screen_height + 0.03 * screen_height) or (self.position.y < 0 - 0.03 * screen_height):
-            if(self in self.car.bullets):
+            if self in self.car.bullets:
                 self.car.bullets.remove(self)
             self.dispose = True
             

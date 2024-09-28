@@ -1,7 +1,4 @@
 from entities.car import Car
-from entities.vector import Vector
-from entities.bullet import Bullet  # Supondo que você tenha um módulo bullet.py
-import copy
 
 
 class Player(Car):

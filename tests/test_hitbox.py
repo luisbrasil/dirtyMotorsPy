@@ -1,8 +1,9 @@
 import unittest
-import math
+
 from entities.hitbox import Hitbox
-from entities.vector import Vector
 from entities.object import Object
+from entities.vector import Vector
+
 
 class TestHitbox(unittest.TestCase):
     

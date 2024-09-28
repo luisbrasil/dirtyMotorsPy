@@ -3,11 +3,11 @@ import pygame
 from entities.object import Object
 
 class Hitbox:
-    def __init__(self, x, y, radius, object : Object):
+    def __init__(self, x, y, radius, objeto : Object):
         self.x = x
         self.y = y 
         self.radius = radius
-        self.object = object
+        self.object = objeto
          
     def draw(self, win):
         pygame.draw.circle(win, (255, 0, 0), (self.object.position.x + self.x, self.object.position.y + self.y), self.radius, 2)

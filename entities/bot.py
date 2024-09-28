@@ -1,8 +1,7 @@
 import random
 import time as py_time
-from entities.car import Car
 
-from entities.vector import Vector
+from entities.car import Car
 
 
 class Bot(Car):

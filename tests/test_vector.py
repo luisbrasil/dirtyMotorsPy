@@ -1,6 +1,7 @@
 import unittest
-import math
+
 from entities.vector import Vector
+
 
 class TestVector(unittest.TestCase):
 

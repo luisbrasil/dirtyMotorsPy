@@ -34,11 +34,14 @@ class Bullet(Object):
     def check_left_screen(self):
         screen_width, screen_height = pygame.display.get_surface().get_size()
         if (self.position.x > screen_width + 0.03 * screen_width) or (self.position.x < 0 - 0.03 * screen_width) or (self.position.y > screen_height + 0.03 * screen_height) or (self.position.y < 0 - 0.03 * screen_height):
-            if self in self.car.bullets:
-                self.car.bullets.remove(self)
-            self.dispose = True
+            self.dispose()
             
     def draw(self, win):
         blit_rotate_center(win, self.image, (self.position.x,
                            self.position.y), math.degrees(self.angle))
 
+
+    def  dispose(self):
+        if self in self.car.bullets:
+            self.car.bullets.remove(self)
+        self.disposed = True

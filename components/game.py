@@ -8,6 +8,7 @@ from entities.bot import Bot
 from entities.obstacle import Obstacle
 from entities.player import Player
 from entities.vector import Vector
+from systems.collision import Collision
 
 
 class Game:
@@ -75,12 +76,11 @@ class Game:
                     for bullet in objeto.bullets:
                         if bullet not in object_list:
                             object_list.append(bullet)
-                    
-            
-            #Object.check_collisions(object_list)
-            
+
+            Collision.check_collisions(object_list)
+
             for objeto in object_list:
-                if objeto.dispose:
+                if objeto.disposed:
                     object_list.remove(objeto)
                 else:
                     objeto.physics(time)

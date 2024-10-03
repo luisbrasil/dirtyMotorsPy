@@ -7,7 +7,7 @@ from entities.vector import Vector
 
 class Object:
     def __init__(self, position, speed, mass):
-        self.initial_position = copy.copy(position)
+        self.initial_position = copy.deepcopy(position)
         self.position: Vector = position
         self.speed: Vector = speed
         self.hitbox = None  # Defina a hitbox conforme necessário
@@ -29,4 +29,4 @@ class Object:
 
     def reset(self):
         self.health = 100
-        # self.position = copy.copy(self.initial_position)
+        self.position = Vector(self.initial_position.x, self.initial_position.y)

@@ -19,8 +19,10 @@ class Bullet(Object):
         self.angle = copy.copy(car.angle)
         self.hitbox = Hitbox(0, 0, 5, self)
         self.car = car
-        
-        self.laser_sound = pygame.mixer.Sound(os.path.join('assets/sounds', 'laser.mp3'))
+
+        shoot_sound = pygame.mixer.Sound(os.path.join('assets/sounds', 'laser.mp3'))
+        shoot_sound.set_volume(0.2)
+        self.laser_sound = shoot_sound
 
         self.play_laser_sound()
         

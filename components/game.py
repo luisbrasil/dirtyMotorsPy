@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 
@@ -37,7 +38,7 @@ class Game:
             animation.update()
 
         self.collision_animations = [anim for anim in self.collision_animations if
-                                     anim.current_frame < len(anim.frames) - 1]
+                                     anim.current_frame < len(anim.frames)]
 
         for obj in self.object_list:
             if isinstance(obj, Car):
@@ -118,8 +119,9 @@ class Game:
                 else:
                     objeto.physics(time)
                     if objeto.health <= 0:
-                        self.collision_animations.append(CollisionAnimation(self.collision_frames, objeto.position))
-                        self.object_list.remove(objeto)
+                        collision_position = copy.deepcopy(objeto.position)
+                        self.collision_animations.append(CollisionAnimation(self.collision_frames, collision_position))
+                        objeto.reset()
             
             
             self.draw(screen, time)

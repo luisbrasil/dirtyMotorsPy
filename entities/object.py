@@ -1,3 +1,5 @@
+import copy
+
 import pygame
 
 from entities.vector import Vector
@@ -5,6 +7,7 @@ from entities.vector import Vector
 
 class Object:
     def __init__(self, position, speed, mass):
+        self.initial_position = copy.copy(position)
         self.position: Vector = position
         self.speed: Vector = speed
         self.hitbox = None  # Defina a hitbox conforme necessário
@@ -23,3 +26,7 @@ class Object:
             offset = Vector(self.direction.x * distance,
                             self.direction.y * distance)
             self.position = self.position + offset
+
+    def reset(self):
+        self.health = 100
+        # self.position = copy.copy(self.initial_position)

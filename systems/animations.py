@@ -14,7 +14,8 @@ class CollisionAnimation:
     def update(self):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
-            self.current_frame = (self.current_frame + 1) % len(self.frames)
+            if self.current_frame < len(self.frames) - 1:
+                self.current_frame += 1
             self.last_update = now
 
     def draw(self, surface):

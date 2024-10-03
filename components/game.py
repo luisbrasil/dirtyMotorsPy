@@ -38,7 +38,7 @@ class Game:
             animation.update()
 
         self.collision_animations = [anim for anim in self.collision_animations if
-                                     anim.current_frame < len(anim.frames)]
+                                     anim.current_frame < len(anim.frames) - 1]
 
         for obj in self.object_list:
             if isinstance(obj, Car):

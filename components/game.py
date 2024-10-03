@@ -1,3 +1,4 @@
+import os
 import sys
 
 import pygame
@@ -5,9 +6,11 @@ import pygame
 from components.assets_port import AssetsPort
 from components.inputs_port import InputsPort
 from entities.bot import Bot
+from entities.car import Car
 from entities.obstacle import Obstacle
 from entities.player import Player
 from entities.vector import Vector
+from systems.animations import CollisionAnimation
 from systems.collision import Collision
 
 
@@ -18,10 +21,39 @@ class Game:
         pygame.mixer.music.load('assets\paranoid.mp3')
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play()
-    
+        self.object_list = []
+        self.collision_frames = []
+        self.load_collision_frames()
+        self.collision_animations = []
 
-    @staticmethod
-    def run():
+    def load_collision_frames(self):
+        for i in range(1, 7):
+            image_path = os.path.join('assets/sprites/animations/explosion', f'frame{i}.png')
+            frame = pygame.image.load(image_path)
+            self.collision_frames.append(frame)
+
+    def update(self, time):
+        for animation in self.collision_animations:
+            animation.update()
+
+        self.collision_animations = [anim for anim in self.collision_animations if
+                                     anim.current_frame < len(anim.frames) - 1]
+
+        for obj in self.object_list:
+            if isinstance(obj, Car):
+                obj.update_flash(time)
+
+    def draw(self, surface, time):
+        self.update(time)
+        for object in self.object_list:
+            object.draw(surface)
+            object.hitbox.draw(surface)
+
+        # Desenhar todas as animações de colisão
+        for animation in self.collision_animations:
+            animation.draw(surface)
+
+    def run(self):
         # Initialize Pygame
         # Constants
         WIDTH, HEIGHT = 800, 600
@@ -40,8 +72,9 @@ class Game:
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,
                    WIDTH, HEIGHT,  Vector(300, 300), 1)
         rock_obstacle = Obstacle(50000,AssetsPort.PREDA)
-        
-        object_list = [player_car, player_car2]
+
+        self.object_list.append(player_car)
+        self.object_list.append(player_car2)
 
         # Set up clock to control the frame rate
         clock = pygame.time.Clock()
@@ -68,26 +101,28 @@ class Game:
             # Renderize the background image
             screen.blit(background_image, (0, 0))
             
-            for objeto in object_list:
+            for objeto in self.object_list:
                 if type(objeto) is Bot:
                     objeto.handle_input(time)
                 elif type(objeto) is Player:
                     objeto.handle_input(time, keys)
                     for bullet in objeto.bullets:
-                        if bullet not in object_list:
-                            object_list.append(bullet)
+                        if bullet not in self.object_list:
+                            self.object_list.append(bullet)
 
-            Collision.check_collisions(object_list)
+            Collision.check_collisions(self.object_list)
 
-            for objeto in object_list:
+            for objeto in self.object_list:
                 if objeto.disposed:
-                    object_list.remove(objeto)
+                    self.object_list.remove(objeto)
                 else:
                     objeto.physics(time)
+                    if objeto.health <= 0:
+                        self.collision_animations.append(CollisionAnimation(self.collision_frames, objeto.position))
+                        self.object_list.remove(objeto)
             
             
-            for objeto in object_list:
-                objeto.draw(screen)
+            self.draw(screen, time)
             
             # Update the display
             pygame.display.flip()

@@ -11,6 +11,7 @@ class Object:
         self.mass = mass
         self.vel = 0
         self.disposed = False
+        self.health = 100
         pygame.init()
 
     def physics(self, time: float):

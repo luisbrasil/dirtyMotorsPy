@@ -47,7 +47,7 @@ class Game:
         self.update(time)
         for object in self.object_list:
             object.draw(surface)
-            object.hitbox.draw(surface)
+            # object.hitbox.draw(surface)
 
         # Desenhar todas as animações de colisão
         for animation in self.collision_animations:

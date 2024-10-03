@@ -22,10 +22,21 @@ class Car(Object):
         self.angle = 0
         self.acceleration = 5
         self.img = image
+
+        #Criando imagem de dano
+        tkdmg_img = self.img.copy()
+        red_overlay = pygame.Surface(tkdmg_img.get_size())
+        red_overlay.fill((255, 0, 0))
+        tkdmg_img.blit(red_overlay, (0, 0), special_flags=pygame.BLEND_MULT)
+        self.tkdmg_img = tkdmg_img
+
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.hitbox = Hitbox(0, 0, 10, self)
         self.bullets = []  # Inicializa a lista de tiros
+        self.is_flashing = False
+        self.flash_duration = 0.06
+        self.flash_timer = 0
         pygame.init()
 
     def rotate(self, time: float, left=False, right=False):
@@ -80,7 +91,10 @@ class Car(Object):
         pygame.mixer.Sound.play(engine)
         
     def draw(self, win):
-        blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(self.angle))
+        if self.is_flashing: # Se tomou dano
+            blit_rotate_center(win, self.tkdmg_img, (self.position.x, self.position.y), math.degrees(self.angle))
+        else:
+            blit_rotate_center(win, self.img, (self.position.x, self.position.y), math.degrees(self.angle))
 
     def check_teleport(self):
         if self.position.x > self.screen_width + 0.03 * self.screen_width:
@@ -91,6 +105,21 @@ class Car(Object):
             self.position.y = 0 - 0.03 * self.screen_height
         elif self.position.y < 0 - 0.03 * self.screen_height:
             self.position.y = self.screen_height
+
+    def takes_damage(self, damage):
+        self.health -= damage
+        self.is_flashing = True
+        self.flash_timer = 0
+
+        if self.health <= 0:
+            return True  # Retorna que o carro foi explodido
+        return False
+
+    def update_flash(self, time):
+        if self.is_flashing:
+            self.flash_timer += time
+            if self.flash_timer >= self.flash_duration:
+                self.is_flashing = False
 
     def shoot(self):
         bullet = Bullet(self)

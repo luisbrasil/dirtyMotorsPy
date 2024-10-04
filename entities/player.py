@@ -1,15 +1,27 @@
+from components.inputs_port import InputsPort
 from entities.car import Car
 
 
 class Player(Car):
-    def __init__(self, max_vel, rotation_vel, image, key_up, key_left, key_down, key_right, key_hit, screen_width, screen_height, initial_pos, mass):
+    def __init__(self, max_vel, rotation_vel, image, playerNumber, screen_width, screen_height, initial_pos, mass):
         super().__init__(max_vel, rotation_vel, image,
                          screen_width, screen_height, initial_pos, mass)
-        self.key_up = key_up
-        self.key_down = key_down
-        self.key_left = key_left
-        self.key_right = key_right
-        self.key_hit = key_hit
+
+        if playerNumber == 1:
+            self.key_up = InputsPort.KEY_UP
+            self.key_down = InputsPort.KEY_DOWN
+            self.key_left = InputsPort.KEY_LEFT
+            self.key_right = InputsPort.KEY_RIGHT
+            self.key_hit = InputsPort.KEY_ONE
+
+        if playerNumber == 2:
+            self.key_up = InputsPort.KEY_W
+            self.key_down = InputsPort.KEY_S
+            self.key_left = InputsPort.KEY_A
+            self.key_right = InputsPort.KEY_D
+            self.key_hit = InputsPort.KEY_K
+            self.angle = 3.14
+
 
     def handle_input(self, time, keys):
         moved = False

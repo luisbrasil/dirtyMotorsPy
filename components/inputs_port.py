@@ -10,5 +10,7 @@ class InputsPort:
     KEY_A = pygame.K_a
     KEY_D = pygame.K_d
     KEY_Q = pygame.K_q
+    KEY_J = pygame.K_j
+    KEY_K = pygame.K_k
     KEY_ONE = pygame.K_KP_1
     

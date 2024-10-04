@@ -64,10 +64,8 @@ class Game:
         pygame.display.set_caption("Dirty Motors")
 
         # Initial square position
-        player_car = Player(1000, 3, AssetsPort.BLACK_CAR,
-                           InputsPort.KEY_UP, InputsPort.KEY_LEFT, InputsPort.KEY_DOWN, InputsPort.KEY_RIGHT, InputsPort.KEY_ONE, WIDTH, HEIGHT, Vector(0, 0),100)
-        player_car2 = Player(1000, 3, AssetsPort.GREEN_CAR,
-                            InputsPort.KEY_W, InputsPort.KEY_A, InputsPort.KEY_S, InputsPort.KEY_D, InputsPort.KEY_Q, WIDTH, HEIGHT, Vector(100, 100),100)
+        player_car = Player(1000, 3, AssetsPort.BLACK_CAR,1, WIDTH, HEIGHT, Vector(100, 300),100)
+        player_car2 = Player(1000, 3, AssetsPort.GREEN_CAR, 2, WIDTH, HEIGHT, Vector(700, 300),100)
         bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, WIDTH, HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,
                    WIDTH, HEIGHT,  Vector(300, 300), 1)

@@ -37,6 +37,9 @@ class Car(Object):
         self.is_flashing = False
         self.flash_duration = 0.06
         self.flash_timer = 0
+        self.kills = 0
+        self.shoot_delay = 0.1
+        self.shoot_timer = 0
         pygame.init()
 
     def rotate(self, time: float, left=False, right=False):
@@ -115,12 +118,16 @@ class Car(Object):
             return True  # Retorna que o carro foi explodido
         return False
 
-    def update_flash(self, time):
+    def update_car(self, time):
         if self.is_flashing:
             self.flash_timer += time
             if self.flash_timer >= self.flash_duration:
                 self.is_flashing = False
 
+        self.shoot_timer += time
+
     def shoot(self):
-        bullet = Bullet(self)
-        self.bullets.append(bullet)
+        if self.shoot_timer >= self.shoot_delay:
+            bullet = Bullet(self)
+            self.bullets.append(bullet)
+            self.shoot_timer = 0

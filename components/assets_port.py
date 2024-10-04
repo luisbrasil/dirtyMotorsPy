@@ -10,4 +10,6 @@ class AssetsPort:
         "assets/sprites/BlueStrip.png"), 0.55)
     PINK_CAR = scale_image(pygame.image.load(
         "assets/sprites/PinkStrip.png"), 0.55)
+    RED_CAR = scale_image(pygame.image.load(
+        "assets/sprites/RedStrip.png"), 0.55)
     PREDA = scale_image(pygame.image.load("assets/sprites/preda.png"), 0.20)

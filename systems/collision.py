@@ -71,5 +71,6 @@ class Collision:
     @staticmethod
     def handle_bullet_car_collision(bullet, car):
         if not (bullet.car == car):
-            car.takes_damage(10)
+            if car.takes_damage(10):
+                bullet.car.kills += 1
             bullet.dispose()

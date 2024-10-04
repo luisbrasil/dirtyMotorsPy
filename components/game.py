@@ -26,6 +26,7 @@ class Game:
         self.collision_frames = []
         self.load_collision_frames()
         self.collision_animations = []
+        self.font = pygame.font.Font(None, 36)
 
     def load_collision_frames(self):
         for i in range(1, 7):
@@ -42,7 +43,7 @@ class Game:
 
         for obj in self.object_list:
             if isinstance(obj, Car):
-                obj.update_flash(time)
+                obj.update_car(time)
 
     def draw(self, surface, time):
         self.update(time)
@@ -53,6 +54,13 @@ class Game:
         # Desenhar todas as animações de colisão
         for animation in self.collision_animations:
             animation.draw(surface)
+
+        player1_kills_text = self.font.render(f'Player 1 Kills: {self.object_list[0].kills}', True, (255, 0, 0))
+        player2_kills_text = self.font.render(f'Player 2 Kills: {self.object_list[1].kills}', True, (0, 255, 0))
+
+        # Blit the kills text onto the surface at the top of the screen
+        surface.blit(player1_kills_text, (10, 10))  # Player 1 kills at top-left
+        surface.blit(player2_kills_text, (600, 10))  # Player 2 kills below Player 1 kills
 
     def run(self):
         # Initialize Pygame
@@ -65,7 +73,7 @@ class Game:
         pygame.display.set_caption("Dirty Motors")
 
         # Initial square position
-        player_car = Player(1000, 3, AssetsPort.BLACK_CAR,1, WIDTH, HEIGHT, Vector(100, 300),100)
+        player_car = Player(1000, 3, AssetsPort.RED_CAR,1, WIDTH, HEIGHT, Vector(100, 300),100)
         player_car2 = Player(1000, 3, AssetsPort.GREEN_CAR, 2, WIDTH, HEIGHT, Vector(700, 300),100)
         bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, WIDTH, HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,

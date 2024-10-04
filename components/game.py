@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 
@@ -116,8 +117,9 @@ class Game:
                 else:
                     objeto.physics(time)
                     if objeto.health <= 0:
-                        self.collision_animations.append(CollisionAnimation(self.collision_frames, objeto.position))
-                        self.object_list.remove(objeto)
+                        collision_position = copy.deepcopy(objeto.position)
+                        self.collision_animations.append(CollisionAnimation(self.collision_frames, collision_position))
+                        objeto.reset()
             
             
             self.draw(screen, time)

@@ -1,5 +1,8 @@
 import pygame
 
+from systems.image_rendering import blit_rotate_center
+
+
 class CollisionAnimation:
     def __init__(self, frames, position):
         self.frames = frames
@@ -11,8 +14,9 @@ class CollisionAnimation:
     def update(self):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
-            self.current_frame = (self.current_frame + 1) % len(self.frames)
+            if self.current_frame < len(self.frames) - 1:
+                self.current_frame += 1
             self.last_update = now
 
     def draw(self, surface):
-        surface.blit(self.frames[self.current_frame], (self.position.x, self.position.y))
+        blit_rotate_center(surface, self.frames[self.current_frame], (self.position.x, self.position.y), 0)

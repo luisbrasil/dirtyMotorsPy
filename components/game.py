@@ -5,7 +5,6 @@ import sys
 import pygame
 
 from components.assets_port import AssetsPort
-from components.inputs_port import InputsPort
 from entities.bot import Bot
 from entities.car import Car
 from entities.obstacle import Obstacle

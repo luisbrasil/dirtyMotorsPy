@@ -16,6 +16,8 @@ from systems.collision import Collision
 
 
 class Game:
+    WIDTH = 800
+    HEIGHT = 600
 
     def __init__(self):
         pygame.init()
@@ -67,19 +69,20 @@ class Game:
     def run(self):
         # Initialize Pygame
         # Constants
-        WIDTH, HEIGHT = 800, 600
         FPS = 60
 
         # Create the Pygame window
-        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption("Dirty Motors")
+        
+        self.show_start_menu(screen)
 
         # Initial square position
-        player_car = Player(1000, 3, AssetsPort.RED_CAR, 1, WIDTH, HEIGHT, Vector(100, 300), 100)
-        player_car2 = Player(1000, 3, AssetsPort.GREEN_CAR, 2, WIDTH, HEIGHT, Vector(700, 300), 100)
-        bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, WIDTH, HEIGHT, Vector(200, 200), 1)
+        player_car = Player(1000, 3, AssetsPort.RED_CAR, 1, self.WIDTH, self.HEIGHT, Vector(100, 300), 100)
+        player_car2 = Player(1000, 3, AssetsPort.GREEN_CAR, 2, self.WIDTH, self.HEIGHT, Vector(700, 300), 100)
+        bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, self.WIDTH, self.HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,
-                   WIDTH, HEIGHT, Vector(300, 300), 1)
+                   self.WIDTH, self.HEIGHT, Vector(300, 300), 1)
         rock_obstacle = Obstacle(50000, AssetsPort.PREDA)
 
         self.object_list.append(player_car)
@@ -111,7 +114,7 @@ class Game:
 
             # Scale the background image to fit the screen size
             background_image = pygame.transform.scale(
-                background_image, (WIDTH, HEIGHT))
+                background_image, (self.WIDTH, self.HEIGHT))
 
             # Renderize the background image
             screen.blit(background_image, (0, 0))
@@ -153,3 +156,38 @@ class Game:
 
         # Done! Time to quit.
         pygame.quit()
+        
+    def show_start_menu(self, screen):
+        background_image = pygame.image.load("assets/sprites/menu-inicial.jpg")
+        background_image = pygame.transform.scale(background_image, (self.WIDTH, self.HEIGHT))
+
+        menu_options = ["Start", "Exit"]
+        selected_option = 0
+
+        while True:
+            # Renderiza o fundo do menu
+            screen.blit(background_image, (0, 0))
+
+            # Desenha as opções do menu
+            for i, option in enumerate(menu_options):
+                color = (255, 255, 255) if i == selected_option else (100, 100, 100)
+                text_surface = self.font.render(option, True, color)
+                screen.blit(text_surface, (self.WIDTH // 2 - text_surface.get_width() // 2, 300 + i * 50))
+
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        selected_option = (selected_option - 1) % len(menu_options)
+                    elif event.key == pygame.K_DOWN:
+                        selected_option = (selected_option + 1) % len(menu_options)
+                    elif event.key == pygame.K_RETURN:
+                        if selected_option == 0:  # "Start" selecionado
+                            return  # Sai da função e inicia o jogo
+                        elif selected_option == 1:  # "Exit" selecionado
+                            pygame.quit()
+                            sys.exit()

@@ -2,6 +2,7 @@ import copy
 import math
 import os
 import pygame
+from components.assets_port import AssetsPort
 from entities.hitbox import Hitbox
 from entities.vector import Vector
 from systems.image_rendering import blit_rotate_center
@@ -14,10 +15,9 @@ class Bullet(Object):
         shoot_position = Vector(car.position.x + car.direction.x, car.position.y + car.direction.y)
         super().__init__(shoot_position, Vector(car.direction.x * 1000, car.direction.y * 1000), 10)
         self.direction = copy.copy(car.direction)
-        self.image = pygame.Surface((10, 5))
-        self.image.fill((255, 0, 0))  # Cor do tiro (vermelho)
+        self.image = AssetsPort.BULLET
         self.angle = copy.copy(car.angle)
-        self.hitbox = Hitbox(0, 0, 5, self)
+        self.hitbox = Hitbox(0, 0, 15, self)
         self.car = car
 
         shoot_sound = pygame.mixer.Sound(os.path.join('assets/sounds', 'laser.mp3'))

@@ -16,8 +16,8 @@ from systems.collision import Collision
 
 
 class Game:
-    WIDTH = 800
-    HEIGHT = 600
+    WIDTH = 1366
+    HEIGHT = 768
 
     def __init__(self):
         pygame.init()
@@ -78,8 +78,8 @@ class Game:
         self.show_start_menu(screen)
 
         # Initial square position
-        player_car = Player(1000, 3, AssetsPort.RED_CAR, 1, self.WIDTH, self.HEIGHT, Vector(100, 300), 100)
-        player_car2 = Player(1000, 3, AssetsPort.GREEN_CAR, 2, self.WIDTH, self.HEIGHT, Vector(700, 300), 100)
+        player_car = Player(500, 3, AssetsPort.RED_CAR, 1, self.WIDTH, self.HEIGHT, Vector(100, 300), 100)
+        player_car2 = Player(500, 3, AssetsPort.GREEN_CAR, 2, self.WIDTH, self.HEIGHT, Vector(700, 300), 100)
         bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, self.WIDTH, self.HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05,
                    self.WIDTH, self.HEIGHT, Vector(300, 300), 1)
@@ -172,7 +172,7 @@ class Game:
             for i, option in enumerate(menu_options):
                 color = (255, 255, 255) if i == selected_option else (100, 100, 100)
                 text_surface = self.font.render(option, True, color)
-                screen.blit(text_surface, (self.WIDTH // 2 - text_surface.get_width() // 2, 300 + i * 50))
+                screen.blit(text_surface, (self.WIDTH // 2 - text_surface.get_width() // 2, 400 + i * 50))
 
             pygame.display.flip()
 

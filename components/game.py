@@ -161,7 +161,7 @@ class Game:
         background_image = pygame.image.load("assets/sprites/menu-inicial.jpg")
         background_image = pygame.transform.scale(background_image, (self.WIDTH, self.HEIGHT))
 
-        menu_options = ["Start", "Exit"]
+        menu_options = ["Start", "Credits", "Exit"]
         selected_option = 0
 
         while True:
@@ -188,6 +188,49 @@ class Game:
                     elif event.key == pygame.K_RETURN:
                         if selected_option == 0:  # "Start" selecionado
                             return  # Sai da função e inicia o jogo
-                        elif selected_option == 1:  # "Exit" selecionado
+                        elif selected_option == 1:  # "Credits" selecionado
+                            self.show_credits_screen(screen)  # Exibe a tela de créditos
+                        elif selected_option == 2:  # "Exit" selecionado
                             pygame.quit()
                             sys.exit()
+
+    def show_credits_screen(self, screen):
+        background_image = pygame.image.load("assets/sprites/credits-background.jpg")
+        background_image = pygame.transform.scale(background_image, (self.WIDTH, self.HEIGHT))
+
+        credits_text = [
+            "Dirty Motors",
+            "",
+            "Developed by:",
+            "Gustavo O. Guidetti",
+            "Luis F. Brasil",
+            "",
+            "Music: Rock n' Roll Racing [1993]",
+            "",
+            "Special Thanks:",
+            "Prof Eduardo H. M. Cruz",
+            "Prof Helio T. Kamakawa",
+            "",
+            "",
+            "",
+            "Press ESC to return to the main menu"
+        ]
+
+        while True:
+            screen.blit(background_image, (0, 0))
+
+            # Desenha o texto dos créditos
+            for i, line in enumerate(credits_text):
+                color = (255, 255, 255)
+                text_surface = self.font.render(line, True, color)
+                screen.blit(text_surface, (self.WIDTH // 2 - text_surface.get_width() // 2, 100 + i * 40))
+
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        return  # Retorna ao menu principal

@@ -168,11 +168,25 @@ class Game:
             # Renderiza o fundo do menu
             screen.blit(background_image, (0, 0))
 
-            # Desenha as opções do menu
+            # Desenha as opções do menu com sombra
             for i, option in enumerate(menu_options):
-                color = (255, 255, 255) if i == selected_option else (100, 100, 100)
-                text_surface = self.font.render(option, True, color)
-                screen.blit(text_surface, (self.WIDTH // 2 - text_surface.get_width() // 2, 400 + i * 50))
+                # Cor do texto principal: Branco brilhante
+                main_color = (255, 255, 255) if i == selected_option else (200, 200, 200)
+                # Cor da sombra: Cinza-escuro
+                shadow_color = (50, 50, 50)
+
+                # Cria a superfície do texto com a sombra
+                text_surface = self.font.render(option, True, main_color)
+                shadow_surface = self.font.render(option, True, shadow_color)
+
+                # Posição do texto
+                x_pos = self.WIDTH // 2 - text_surface.get_width() // 2
+                y_pos = 400 + i * 50
+
+                # Desenha a sombra um pouco deslocada para criar o efeito
+                screen.blit(shadow_surface, (x_pos + 2, y_pos + 2))
+                # Desenha o texto principal por cima da sombra
+                screen.blit(text_surface, (x_pos, y_pos))
 
             pygame.display.flip()
 

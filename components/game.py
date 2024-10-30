@@ -61,15 +61,15 @@ class Game:
         player2_kills_text = self.font.render(f'Player 2 Kills: {self.object_list[1].kills}', True, (0, 255, 0))
 
         surface.blit(player1_kills_text, (10, 10))
-        surface.blit(player2_kills_text, (600, 10))
+        surface.blit(player2_kills_text, (1100, 10))
 
     def run(self):
         FPS = 60
         screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption("Dirty Motors")
 
-        player_car = Player(500, 3, AssetsPort.RED_CAR, 1, self.WIDTH, self.HEIGHT, Vector(100, 300), 100)
-        player_car2 = Player(500, 3, AssetsPort.GREEN_CAR, 2, self.WIDTH, self.HEIGHT, Vector(700, 300), 100)
+        player_car = Player(500, 3, AssetsPort.RED_CAR, 1, self.WIDTH, self.HEIGHT, Vector(200, 375), 100)
+        player_car2 = Player(500, 3, AssetsPort.GREEN_CAR, 2, self.WIDTH, self.HEIGHT, Vector(1150, 375), 100)
         bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, self.WIDTH, self.HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05, self.WIDTH, self.HEIGHT, Vector(300, 300), 1)
         rock_obstacle = Obstacle(50000, AssetsPort.PREDA)

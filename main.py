@@ -38,7 +38,8 @@ def show_start_menu(screen, font):
                     selected_option = (selected_option + 1) % len(menu_options)
                 elif event.key == pygame.K_RETURN:
                     if selected_option == 0:
-                        return "start"
+                        game = Game()
+                        game.run()
                     elif selected_option == 1:
                         show_credits_screen(screen, font)
                     elif selected_option == 2:
@@ -79,10 +80,7 @@ def main():
     font = pygame.font.Font(None, 36)
 
     while True:
-        choice = show_start_menu(screen, font)
-        if choice == "start":
-            game = Game()
-            game.run()
+        show_start_menu(screen, font)
 
 if __name__ == "__main__":
     main()

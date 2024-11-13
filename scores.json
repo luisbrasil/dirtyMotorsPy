@@ -1,0 +1,22 @@
+[
+    {
+        "Player 1": {
+            "name": "Luis",
+            "kills": 4
+        },
+        "Player 2": {
+            "name": "Koiti",
+            "kills": 3
+        }
+    },
+    {
+        "Player 1": {
+            "name": "Pedro",
+            "kills": 1
+        },
+        "Player 2": {
+            "name": "Guidetti",
+            "kills": 2
+        }
+    }
+]

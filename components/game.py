@@ -1,4 +1,5 @@
 import copy
+import json
 import os
 import sys
 
@@ -70,11 +71,61 @@ class Game:
         surface.blit(player1_kills_text, (10, 10))
         surface.blit(player2_kills_text, (1100, 10))
 
+    def save_score(self, player1_name, player2_name, player1_kills, player2_kills):
+        score_data = {
+            "Player 1": {"name": player1_name, "kills": player1_kills},
+            "Player 2": {"name": player2_name, "kills": player2_kills}
+        }
+        try:
+            with open("scores.json", "r") as file:
+                scores = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            scores = []
+
+        scores.append(score_data)
+
+        with open("scores.json", "w") as file:
+            json.dump(scores, file, indent=4)
+
+    def get_player_name(self, surface, prompt):
+        name = ""
+        input_active = True
+        while input_active:
+            surface.fill((0, 0, 0))
+            prompt_surface = self.font.render(prompt, True, (255, 255, 255))
+            name_surface = self.font.render(name, True, (255, 255, 255))
+            surface.blit(prompt_surface, (self.WIDTH // 2 - prompt_surface.get_width() // 2, 200))
+            surface.blit(name_surface, (self.WIDTH // 2 - name_surface.get_width() // 2, 300))
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        input_active = False
+                    elif event.key == pygame.K_BACKSPACE:
+                        name = name[:-1]
+                    else:
+                        name += event.unicode
+
+        return name
+
     def show_results_screen(self, surface):
+        player1_kills = self.object_list[0].kills
+        player2_kills = self.object_list[1].kills
+        player1_name = self.get_player_name(surface, "Enter name for Player 1:")
+        player2_name = self.get_player_name(surface, "Enter name for Player 2:")
+
+        # Salvar pontuação
+        self.save_score(player1_name, player2_name, player1_kills, player2_kills)
+
+        # Exibir resultados
         surface.fill((0, 0, 0))
         results_text = [
-            f'Player 1 Kills: {self.object_list[0].kills}',
-            f'Player 2 Kills: {self.object_list[1].kills}',
+            f'{player1_name} Kills: {player1_kills}',
+            f'{player2_name} Kills: {player2_kills}',
             "",
             "Press ESC to return to the main menu"
         ]
@@ -151,7 +202,6 @@ class Game:
                     if objeto.health <= 0:
                         explosion_sound.play()
                         self.explosion_time = pygame.time.get_ticks()
-
                         collision_position = copy.deepcopy(objeto.position)
                         self.collision_animations.append(CollisionAnimation(self.collision_frames, collision_position))
                         objeto.reset()
@@ -159,8 +209,8 @@ class Game:
             if self.explosion_time and pygame.time.get_ticks() - self.explosion_time >= 500:
                 gets_hammered_sound.play()
                 self.explosion_time = None
-            self.draw(screen, time)
 
+            self.draw(screen, time)
             pygame.display.flip()
             clock.tick(FPS)
 

@@ -18,5 +18,15 @@
             "name": "Guidetti",
             "kills": 2
         }
+    },
+    {
+        "Player 1": {
+            "name": "Gustavo",
+            "kills": 5
+        },
+        "Player 2": {
+            "name": "Luis",
+            "kills": 3
+        }
     }
 ]

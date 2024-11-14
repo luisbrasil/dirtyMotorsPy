@@ -1,5 +1,6 @@
 import sys
 import pygame
+import json
 from components.game import Game
 
 def show_start_menu(screen, font):
@@ -7,7 +8,7 @@ def show_start_menu(screen, font):
     background_image = pygame.image.load("assets/sprites/menu-inicial.jpg")
     background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
-    menu_options = ["Start", "Credits", "Exit"]
+    menu_options = ["Start", "Scores", "Credits", "Exit"]
     selected_option = 0
 
     while True:
@@ -41,8 +42,10 @@ def show_start_menu(screen, font):
                         game = Game()
                         game.run()
                     elif selected_option == 1:
-                        show_credits_screen(screen, font)
+                        show_score_history(screen, font)
                     elif selected_option == 2:
+                        show_credits_screen(screen, font)
+                    elif selected_option == 3:
                         pygame.quit()
                         sys.exit()
 
@@ -60,6 +63,44 @@ def show_credits_screen(screen, font):
     while True:
         screen.blit(background_image, (0, 0))
         for i, line in enumerate(credits_text):
+            text_surface = font.render(line, True, (255, 255, 255))
+            screen.blit(text_surface, (WIDTH // 2 - text_surface.get_width() // 2, 100 + i * 40))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return
+
+def show_score_history(screen, font):
+    WIDTH, HEIGHT = Game.WIDTH, Game.HEIGHT
+    background_image = pygame.image.load("assets/sprites/credits-background.jpg")
+    background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
+
+    try:
+        with open("scores.json", "r") as file:
+            scores = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        scores = []
+
+    # Criar um limite para exibir até 10 últimas partidas
+    history_text = ["Score History (Last 10 Games)", ""]
+    for entry in scores[-10:]:
+        player1 = entry.get("Player 1", {})
+        player2 = entry.get("Player 2", {})
+        history_text.append(f"{player1.get('name', 'Player 1')}: {player1.get('kills', 0)} kills")
+        history_text.append(f"{player2.get('name', 'Player 2')}: {player2.get('kills', 0)} kills")
+        history_text.append("")
+
+    history_text.append("Press ESC to return to the main menu")
+
+    while True:
+        screen.blit(background_image, (0, 0))
+        for i, line in enumerate(history_text):
             text_surface = font.render(line, True, (255, 255, 255))
             screen.blit(text_surface, (WIDTH // 2 - text_surface.get_width() // 2, 100 + i * 40))
 

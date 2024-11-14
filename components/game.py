@@ -143,6 +143,46 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         return
 
+    def show_pause_menu(self, surface):
+        pause_options = ["Resume", "Exit to Menu"]
+        selected_option = 0
+
+        # Captura do estado atual da tela de jogo
+        background_snapshot = surface.copy()
+
+        # Cria uma superfície semi-transparente para sobrepor
+        overlay = pygame.Surface((self.WIDTH, self.HEIGHT), pygame.SRCALPHA)
+        overlay.fill((0, 0, 0, 128))  # Último valor (128) é a opacidade
+
+        while True:
+            # Desenha a captura do jogo e aplica a camada semi-transparente
+            surface.blit(background_snapshot, (0, 0))
+            surface.blit(overlay, (0, 0))  # Exibe a sobreposição transparente
+
+            # Renderiza as opções do menu
+            for i, option in enumerate(pause_options):
+                color = (255, 255, 255) if i == selected_option else (200, 200, 200)
+                text_surface = self.font.render(option, True, color)
+                surface.blit(text_surface, (self.WIDTH // 2 - text_surface.get_width() // 2, 300 + i * 50))
+
+            pygame.display.flip()
+
+            # Gerenciamento de eventos do menu de pausa
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        selected_option = (selected_option - 1) % len(pause_options)
+                    elif event.key == pygame.K_DOWN:
+                        selected_option = (selected_option + 1) % len(pause_options)
+                    elif event.key == pygame.K_RETURN:
+                        if selected_option == 0:  # Resume
+                            return
+                        elif selected_option == 1:  # Exit to Menu
+                            return "exit_to_menu"
+
     def run(self):
         FPS = 60
         screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
@@ -170,6 +210,11 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    # Mostrar menu de pausa
+                    result = self.show_pause_menu(screen)
+                    if result == "exit_to_menu":
+                        return
 
             # Verifica se o tempo de jogo acabou
             elapsed_time = (pygame.time.get_ticks() - self.start_time) / 1000

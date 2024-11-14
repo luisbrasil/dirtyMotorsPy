@@ -12,6 +12,7 @@ from entities.player import Player
 from entities.vector import Vector
 from systems.animations import CollisionAnimation
 from systems.collision import Collision
+from systems.image_rendering import scale_image
 
 
 class Game:
@@ -148,8 +149,8 @@ class Game:
         pygame.display.set_caption("Dirty Motors")
 
         # Instanciando os jogadores e bots
-        player_car = Player(500, 3, AssetsPort.RED_CAR, 1, self.WIDTH, self.HEIGHT, Vector(200, 375), 100)
-        player_car2 = Player(500, 3, AssetsPort.GREEN_CAR, 2, self.WIDTH, self.HEIGHT, Vector(1150, 375), 100)
+        player_car = Player(500, 3, scale_image(AssetsPort.RED_CAR,2), 1, self.WIDTH, self.HEIGHT, Vector(200, 375), 100)
+        player_car2 = Player(500, 3, scale_image(AssetsPort.GREEN_CAR,2), 2, self.WIDTH, self.HEIGHT, Vector(1150, 375), 100)
         bot = Bot(1000, 2, AssetsPort.PINK_CAR, 0.05, self.WIDTH, self.HEIGHT, Vector(200, 200), 1)
         bot2 = Bot(1000, 2, AssetsPort.BLUE_CAR, 0.05, self.WIDTH, self.HEIGHT, Vector(300, 300), 1)
         self.object_list.extend([player_car, player_car2])

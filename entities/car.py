@@ -32,7 +32,7 @@ class Car(Object):
 
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.hitbox = Hitbox(0, 0, 10, self)
+        self.hitbox = Hitbox(0, 0, 20, self)
         self.bullets = []  # Inicializa a lista de tiros
         self.is_flashing = False
         self.flash_duration = 0.06

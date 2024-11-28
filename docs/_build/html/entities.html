@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>entities package &mdash; Dirty Motors  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="main module" href="main.html" />
+    <link rel="prev" title="components package" href="components.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dirty Motors
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">dirtyMotorsPy</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.html">components package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">entities package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entities-bot-module">entities.bot module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entities-bullet-module">entities.bullet module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entities-car-module">entities.car module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities.hitbox">entities.hitbox module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#entities.hitbox.Hitbox"><code class="docutils literal notranslate"><span class="pre">Hitbox</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities.map">entities.map module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities.object">entities.object module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#entities.object.Object"><code class="docutils literal notranslate"><span class="pre">Object</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities.obstacle">entities.obstacle module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#entities.obstacle.Obstacle"><code class="docutils literal notranslate"><span class="pre">Obstacle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#entities-player-module">entities.player module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities.vector">entities.vector module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#entities.vector.Vector"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities.world">entities.world module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-entities">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="systems.html">systems package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dirty Motors</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">dirtyMotorsPy</a></li>
+      <li class="breadcrumb-item active">entities package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/entities.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entities-package">
+<h1>entities package<a class="headerlink" href="#entities-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="entities-bot-module">
+<h2>entities.bot module<a class="headerlink" href="#entities-bot-module" title="Link to this heading"></a></h2>
+</section>
+<section id="entities-bullet-module">
+<h2>entities.bullet module<a class="headerlink" href="#entities-bullet-module" title="Link to this heading"></a></h2>
+</section>
+<section id="entities-car-module">
+<h2>entities.car module<a class="headerlink" href="#entities-car-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-entities.hitbox">
+<span id="entities-hitbox-module"></span><h2>entities.hitbox module<a class="headerlink" href="#module-entities.hitbox" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="entities.hitbox.Hitbox">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">entities.hitbox.</span></span><span class="sig-name descname"><span class="pre">Hitbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objeto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#entities.object.Object" title="entities.object.Object"><span class="pre">Object</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/hitbox.html#Hitbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.hitbox.Hitbox" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.hitbox.Hitbox.check_collision">
+<span class="sig-name descname"><span class="pre">check_collision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/hitbox.html#Hitbox.check_collision"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.hitbox.Hitbox.check_collision" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.hitbox.Hitbox.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">win</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/hitbox.html#Hitbox.draw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.hitbox.Hitbox.draw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-entities.map">
+<span id="entities-map-module"></span><h2>entities.map module<a class="headerlink" href="#module-entities.map" title="Link to this heading"></a></h2>
+</section>
+<section id="module-entities.object">
+<span id="entities-object-module"></span><h2>entities.object module<a class="headerlink" href="#module-entities.object" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="entities.object.Object">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">entities.object.</span></span><span class="sig-name descname"><span class="pre">Object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/object.html#Object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.object.Object" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.object.Object.physics">
+<span class="sig-name descname"><span class="pre">physics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/object.html#Object.physics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.object.Object.physics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.object.Object.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/object.html#Object.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.object.Object.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.object.Object.teleport">
+<span class="sig-name descname"><span class="pre">teleport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/object.html#Object.teleport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.object.Object.teleport" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-entities.obstacle">
+<span id="entities-obstacle-module"></span><h2>entities.obstacle module<a class="headerlink" href="#module-entities.obstacle" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="entities.obstacle.Obstacle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">entities.obstacle.</span></span><span class="sig-name descname"><span class="pre">Obstacle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/obstacle.html#Obstacle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.obstacle.Obstacle" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#entities.object.Object" title="entities.object.Object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="entities.obstacle.Obstacle.START_POS">
+<span class="sig-name descname"><span class="pre">START_POS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(150,</span> <span class="pre">150)</span></em><a class="headerlink" href="#entities.obstacle.Obstacle.START_POS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.obstacle.Obstacle.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">win</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/obstacle.html#Obstacle.draw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.obstacle.Obstacle.draw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="entities-player-module">
+<h2>entities.player module<a class="headerlink" href="#entities-player-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-entities.vector">
+<span id="entities-vector-module"></span><h2>entities.vector module<a class="headerlink" href="#module-entities.vector" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="entities.vector.Vector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">entities.vector.</span></span><span class="sig-name descname"><span class="pre">Vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.vector.Vector.dot">
+<span class="sig-name descname"><span class="pre">dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector.dot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector.dot" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.vector.Vector.length">
+<span class="sig-name descname"><span class="pre">length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector.length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector.length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.vector.Vector.module">
+<span class="sig-name descname"><span class="pre">module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector.module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector.module" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.vector.Vector.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector.normalize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.vector.Vector.prod_int">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prod_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector.prod_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector.prod_int" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="entities.vector.Vector.set_module">
+<span class="sig-name descname"><span class="pre">set_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/entities/vector.html#Vector.set_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#entities.vector.Vector.set_module" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-entities.world">
+<span id="entities-world-module"></span><h2>entities.world module<a class="headerlink" href="#module-entities.world" title="Link to this heading"></a></h2>
+</section>
+<section id="module-entities">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-entities" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="components.html" class="btn btn-neutral float-left" title="components package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="main.html" class="btn btn-neutral float-right" title="main module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Luis e Guidetti.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

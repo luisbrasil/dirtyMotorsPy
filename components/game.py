@@ -18,7 +18,7 @@ from systems.image_rendering import scale_image
 class Game:
     WIDTH = 1366
     HEIGHT = 768
-    GAME_DURATION = 300  # duração do jogo em segundos (5 minutos)
+    GAME_DURATION = 60
 
     def __init__(self):
         pygame.init()

@@ -68,6 +68,14 @@ class Collision:
         if hasattr(obj2, "angle"):
             obj2.angle = math.atan2(obj2.direction.y, obj2.direction.x)
 
+        if hasattr(obj1, "health"):
+            obj1.angle = math.atan2(obj1.direction.y, obj1.direction.x)
+
+        if obj1.takes_damage(25):
+            obj2.kills += 1
+        if obj2.takes_damage(25):
+            obj1.kills += 1
+
     @staticmethod
     def handle_bullet_car_collision(bullet, car):
         if not (bullet.car == car):
